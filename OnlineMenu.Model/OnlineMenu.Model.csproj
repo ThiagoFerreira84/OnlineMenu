@@ -51,79 +51,77 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuCategory.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MenuItem.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MenuSubCategory.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="OnlineMenyModel.Context.cs">
+    <Compile Include="OnlineMenuModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMenyModel.Context.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="OnlineMenyModel.cs">
+    <Compile Include="OnlineMenuModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="OnlineMenyModel.Designer.cs">
+    <Compile Include="OnlineMenuModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMenyModel.edmx</DependentUpon>
+      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderItem.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restaurant.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Subscription.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Table.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserType.cs">
-      <DependentUpon>OnlineMenyModel.tt</DependentUpon>
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="OnlineMenyModel.edmx">
+    <EntityDeploy Include="OnlineMenuModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OnlineMenyModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>OnlineMenuModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="OnlineMenyModel.edmx.diagram">
-      <DependentUpon>OnlineMenyModel.edmx</DependentUpon>
+    <None Include="OnlineMenuModel.edmx.diagram">
+      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OnlineMenyModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OnlineMenyModel.Context.cs</LastGenOutput>
-      <DependentUpon>OnlineMenyModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="OnlineMenyModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineMenyModel.edmx</DependentUpon>
-      <LastGenOutput>OnlineMenyModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="OnlineMenuModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
+      <LastGenOutput>OnlineMenuModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="OnlineMenuModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
+      <LastGenOutput>OnlineMenuModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
