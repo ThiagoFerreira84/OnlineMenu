@@ -11,7 +11,7 @@ namespace OnlineMenu.Data
     {
         IRepository<Restaurant> Restaurant { get; }
 
-        int Complete();
+        int SaveChanges();
     }
 
     public class UnitOfWork : IUnitOfWork
@@ -27,7 +27,7 @@ namespace OnlineMenu.Data
             Restaurant = new Repository<Restaurant>(_context);
         }
 
-        public int Complete()
+        public int SaveChanges()
         {
             return _context.SaveChanges();
         }

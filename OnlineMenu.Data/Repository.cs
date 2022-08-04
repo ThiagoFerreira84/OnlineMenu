@@ -11,7 +11,7 @@ namespace OnlineMenu.Data
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        TEntity Get(int id);
+        TEntity Get(Guid id);
 
         IEnumerable<TEntity> GetAll();
 
@@ -26,6 +26,7 @@ namespace OnlineMenu.Data
         void AddRange(IEnumerable<TEntity> entities);
 
         void Remove(TEntity entity);
+
         void RemoveRange(IEnumerable<TEntity> entities);
 
         void Update(TEntity entity);
@@ -44,7 +45,7 @@ namespace OnlineMenu.Data
             dbSet = Context.Set<TEntity>();
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(Guid id)
         {
             return dbSet.Find(id);
         }
