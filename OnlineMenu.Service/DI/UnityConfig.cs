@@ -1,5 +1,4 @@
-﻿using OnlineMenu.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +10,11 @@ namespace OnlineMenu.Service.DI
     {
         public static void RegisterComponents()
         {
-            var container = new UnityContainer();
-            container.RegisterType<ITypeService, TypeService>(new ContainerControlledLifetimeManager());
+            //var container = new UnityContainer();
+            //container.RegisterType<ITypeService, TypeService>(new ContainerControlledLifetimeManager());
 
-            container.RegisterType<IUnitOfWork, UnitOfWork>(new ContainerControlledLifetimeManager());
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            //container.RegisterType<IUnitOfWork, UnitOfWork>(new ContainerControlledLifetimeManager());
+            //DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
 }
