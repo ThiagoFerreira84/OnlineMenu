@@ -125,6 +125,16 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="DI\UnityConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\VMMenuCategory.cs" />
+    <Compile Include="ViewModels\VMMenuItem.cs" />
+    <Compile Include="ViewModels\VMMenuSubCategory.cs" />
+    <Compile Include="ViewModels\VMOrder.cs" />
+    <Compile Include="ViewModels\VMOrderItem.cs" />
+    <Compile Include="ViewModels\VMRestaurant.cs" />
+    <Compile Include="ViewModels\VMSubscription.cs" />
+    <Compile Include="ViewModels\VMTable.cs" />
+    <Compile Include="ViewModels\VMUser.cs" />
+    <Compile Include="ViewModels\VMUserType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -140,6 +150,7 @@
       <Name>OnlineMenu.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
