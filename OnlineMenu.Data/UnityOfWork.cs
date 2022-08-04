@@ -9,8 +9,8 @@ namespace OnlineMenu.Data
 {
     public interface IUnitOfWork : IDisposable
     {
-        //ITypeRepository Type { get; }
-        
+        IRepository<Restaurant> Restaurant { get; }
+
         int Complete();
     }
 
@@ -18,12 +18,13 @@ namespace OnlineMenu.Data
     {
         private readonly OnlineMenuEntities _context;
 
-        //public ITypeRepository Type { get; private set; }
-       
+        public IRepository<Restaurant> Restaurant { get; private set; }
+
         public UnitOfWork()
         {
             _context = new OnlineMenuEntities();
-            
+
+            Restaurant = new Repository<Restaurant>(_context);
         }
 
         public int Complete()
