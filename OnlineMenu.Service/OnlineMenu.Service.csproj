@@ -130,6 +130,16 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineMenu.Data\OnlineMenu.Data.csproj">
+      <Project>{4F4B9B78-9DBC-496F-B020-DAE61F249128}</Project>
+      <Name>OnlineMenu.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineMenu.Model\OnlineMenu.Model.csproj">
+      <Project>{55FA4676-88A2-4A98-82A6-33B2B2AEFF6F}</Project>
+      <Name>OnlineMenu.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
