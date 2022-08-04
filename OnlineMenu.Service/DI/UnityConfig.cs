@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.Mvc5;
 
 namespace OnlineMenu.Service.DI
 {
@@ -10,7 +12,7 @@ namespace OnlineMenu.Service.DI
     {
         public static void RegisterComponents()
         {
-            //var container = new UnityContainer();
+            var container = new UnityContainer();
             //container.RegisterType<ITypeService, TypeService>(new ContainerControlledLifetimeManager());
 
             //container.RegisterType<IUnitOfWork, UnitOfWork>(new ContainerControlledLifetimeManager());
