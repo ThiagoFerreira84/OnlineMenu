@@ -86,7 +86,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Logo" Type="image" />
-          <Property Name="GovernmentTax" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ServiceTax" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="LastModifiedDate" Type="datetime" />
@@ -100,16 +99,6 @@
           <Property Name="RestaurantId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ActivationDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Table">
           <Key>
@@ -303,7 +292,6 @@
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
@@ -373,7 +361,6 @@
           <EntitySet Name="OrderItems" EntityType="OnlineMenuModel.OrderItem" />
           <EntitySet Name="Restaurants" EntityType="OnlineMenuModel.Restaurant" />
           <EntitySet Name="Subscriptions" EntityType="OnlineMenuModel.Subscription" />
-          <EntitySet Name="sysdiagrams" EntityType="OnlineMenuModel.sysdiagram" />
           <EntitySet Name="Tables" EntityType="OnlineMenuModel.Table" />
           <EntitySet Name="Users" EntityType="OnlineMenuModel.User" />
           <EntitySet Name="UserTypes" EntityType="OnlineMenuModel.UserType" />
@@ -525,7 +512,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="GovernmentTax" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ServiceTax" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
@@ -545,16 +531,6 @@
           <Property Name="ActivationDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Restaurant" Relationship="OnlineMenuModel.FK_Subscription_Restaurant" FromRole="Subscription" ToRole="Restaurant" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Table">
           <Key>
@@ -836,7 +812,6 @@
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="ServiceTax" ColumnName="ServiceTax" />
-                <ScalarProperty Name="GovernmentTax" ColumnName="GovernmentTax" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -852,17 +827,6 @@
                 <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
                 <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="OnlineMenuModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
