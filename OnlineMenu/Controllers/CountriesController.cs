@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OnlineMenu.Service.Services;
+using OnlineMenu.Service.ViewModels;
 
 namespace OnlineMenu.Controllers
 {
@@ -29,6 +30,18 @@ namespace OnlineMenu.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(VMCountry vmEntity)
+        {
+            if (ModelState.IsValid)
+            {
+                countryServie.Create(vmEntity);
+                return Json(new { success = true, adminSection = true }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { success = false }, JsonRequestBehavior.AllowGet);
         }
     }
 }
