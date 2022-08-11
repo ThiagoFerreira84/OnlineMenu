@@ -71,7 +71,7 @@ namespace OnlineMenu.Data
         }
 
         public void Add(TEntity entity)
-        {
+        {            
             dbSet.Add(entity);
         }
 

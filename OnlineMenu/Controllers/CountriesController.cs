@@ -13,7 +13,7 @@ namespace OnlineMenu.Controllers
 {
     public class CountriesController : Controller
     {
-        ICountryService countryServie;
+        private ICountryService countryServie;
 
         public CountriesController(ICountryService countryServie)
         {
@@ -35,13 +35,20 @@ namespace OnlineMenu.Controllers
         [HttpPost]
         public ActionResult Create(VMCountry vmEntity)
         {
-            if (ModelState.IsValid)
-            {
-                countryServie.Create(vmEntity);
-                return Json(new { success = true, adminSection = true }, JsonRequestBehavior.AllowGet);
-            }
+            countryServie.Create(vmEntity);
+            return RedirectToAction("Index");
+        }
 
-            return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+        public ActionResult Edit(Guid id)
+        {
+            return View(countryServie.GetById(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(VMCountry vmEntity)
+        {
+            countryServie.Update(vmEntity);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -25,6 +25,24 @@ namespace OnlineMenu
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/extrajs").Include(
+                      "~/Scripts/autosize.min.js",
+                      "~/Scripts/moment.js",
+                      "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/jquery.dataTables.min.js",
+                      "~/Scripts/bootstrap-hover-dropdown.min.js",
+                      "~/Scripts/SiteSections/AdminSections.js",
+                      "~/Scripts/SiteSections/AppSections.js",
+                      "~/Scripts/App/app.js",
+                      "~/Scripts/App/Charts.js",
+                      "~/Scripts/monthly.js",
+                      "~/Scripts/jquery.canvasjs.min.js",
+                      "~/Scripts/uikit.min.js",
+                      "~/Scripts/uikit-icons.min.js",
+                      "~/Scripts/Site.js",
+                      "~/Scripts/site-event.js",
+                      "~/Scripts/views.js"));
         }
     }
 }

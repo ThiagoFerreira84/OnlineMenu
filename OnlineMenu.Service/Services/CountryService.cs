@@ -33,6 +33,7 @@ namespace OnlineMenu.Service.Services
         public int Create(VMCountry vmEntity)
         {
             var entity = Mapper.Map<Country>(vmEntity);
+            entity.Id = Guid.NewGuid();
             unitOfWork.Country.Add(entity);
             return unitOfWork.SaveChanges();
         }
