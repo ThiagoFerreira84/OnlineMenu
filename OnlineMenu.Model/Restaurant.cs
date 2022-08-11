@@ -24,17 +24,16 @@ namespace OnlineMenu.Model
         }
     
         public System.Guid Id { get; set; }
+        public System.Guid CountryId { get; set; }
         public string Name { get; set; }
-        public string Country { get; set; }
         public string Address { get; set; }
         public byte[] Logo { get; set; }
-        public string CurrencyDisplay { get; set; }
-        public Nullable<decimal> GovernmentTax { get; set; }
         public Nullable<decimal> ServiceTax { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string LastModifiedBy { get; set; }
     
+        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuCategory> MenuCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

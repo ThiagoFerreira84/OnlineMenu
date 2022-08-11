@@ -1,11 +1,14 @@
-﻿using System;
+﻿using OnlineMenu.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace OnlineMenu.Data
 {
@@ -36,13 +39,13 @@ namespace OnlineMenu.Data
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext Context;
+        protected readonly DbContext context;
         private readonly DbSet<TEntity> dbSet;
 
         public Repository(DbContext context)
         {
-            Context = context;
-            dbSet = Context.Set<TEntity>();
+            this.context = context;
+            dbSet = this.context.Set<TEntity>();
         }
 
         public TEntity Get(Guid id)
@@ -82,7 +85,11 @@ namespace OnlineMenu.Data
 
         public void Remove(TEntity entity)
         {
-            dbSet.Remove(entity);
+            using (var dbContext = new OnlineMenuEntities())
+            {
+                dbContext.Entry<TEntity>(entity).State = EntityState.Deleted;
+                dbContext.SaveChanges();
+            }
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)

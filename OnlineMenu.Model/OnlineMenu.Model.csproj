@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Country.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MenuCategory.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>

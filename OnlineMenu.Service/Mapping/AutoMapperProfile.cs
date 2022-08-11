@@ -23,6 +23,7 @@ namespace OnlineMenu.Service.Mapping
             CreateMap<Table, VMTable>().ReverseMap();
             CreateMap<User, VMUser>().ReverseMap();
             CreateMap<UserType, VMUserType>().ReverseMap();
+            CreateMap<Country, VMCountry>().ReverseMap();
         }
     }
 }

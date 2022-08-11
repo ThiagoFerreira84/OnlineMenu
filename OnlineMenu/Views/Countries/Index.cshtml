@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMCountry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Countries</h2>
+
+<p>
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "Countries")';return false;">
+        <span class="fa fa-plus-circle"></span> Create
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrencySymbol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GovernmentTax)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrencySymbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GovernmentTax)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

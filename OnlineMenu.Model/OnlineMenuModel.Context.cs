@@ -25,6 +25,7 @@ namespace OnlineMenu.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<MenuCategory> MenuCategories { get; set; }
         public virtual DbSet<MenuItem> MenuItems { get; set; }
         public virtual DbSet<MenuSubCategory> MenuSubCategories { get; set; }

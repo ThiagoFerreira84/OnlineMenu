@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using OnlineMenu.Data;
 using OnlineMenu.Model;
+using OnlineMenu.Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace OnlineMenu.Service.DI
         {
             var container = new UnityContainer();
             //container.RegisterType<ITypeService, TypeService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ICountryService, CountryService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IRepository<Restaurant>, Repository<Restaurant>>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IUnitOfWork, UnitOfWork>(new ContainerControlledLifetimeManager());
