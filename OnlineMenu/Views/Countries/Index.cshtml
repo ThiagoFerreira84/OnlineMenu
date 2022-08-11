@@ -8,6 +8,10 @@
 <h2>Countries</h2>
 
 <p>
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "Countries")';return false;">
+        <span class="fa fa-plus-circle"></span> Create
+    </button>
+
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
