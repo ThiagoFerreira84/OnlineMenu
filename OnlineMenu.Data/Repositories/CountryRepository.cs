@@ -21,7 +21,7 @@ namespace OnlineMenu.Data.Repositories
 
         public OnlineMenuEntities Entities
         {
-            get { return Context as OnlineMenuEntities; }
+            get { return context as OnlineMenuEntities; }
         }
 
         public List<Country> GetAllList()

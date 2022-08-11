@@ -18,6 +18,8 @@ namespace OnlineMenu.Service.Services
 
         int Update(VMCountry entity);
 
+        void Delete(Guid Id);
+
         List<VMCountry> GetAll();
     }
 
@@ -55,6 +57,13 @@ namespace OnlineMenu.Service.Services
             var entity = Mapper.Map<Country>(vmEntity);
             unitOfWork.Country.Update(entity);
             return unitOfWork.SaveChanges();
+        }
+
+        public void Delete(Guid Id)
+        {
+            var entity = Mapper.Map<Country>(GetById(Id));
+            unitOfWork.Country.Remove(entity);
+            return;
         }
     }
 }

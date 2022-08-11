@@ -50,5 +50,17 @@ namespace OnlineMenu.Controllers
             countryServie.Update(vmEntity);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Delete(Guid id)
+        {
+            return View(countryServie.GetById(id));
+        }
+
+        [HttpPost]
+        public ActionResult Delete(VMCountry vmEntity)
+        {
+            countryServie.Delete(vmEntity.Id);
+            return RedirectToAction("Index");
+        }
     }
 }
