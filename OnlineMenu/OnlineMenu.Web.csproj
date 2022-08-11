@@ -147,54 +147,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Country.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MenuCategory.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MenuItem.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MenuSubCategory.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineMenuModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMenuModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineMenuModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineMenuModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderItem.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Restaurant.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Subscription.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Table.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserType.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,16 +161,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\OnlineMenuModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
-      <LastGenOutput>OnlineMenuModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\OnlineMenuModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
-      <LastGenOutput>OnlineMenuModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\FontAwesome.otf" />
@@ -226,13 +168,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <EntityDeploy Include="Models\OnlineMenuModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OnlineMenuModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\OnlineMenuModel.edmx.diagram">
-      <DependentUpon>OnlineMenuModel.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -258,14 +193,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Countries\Create.cshtml" />
-    <Content Include="Views\Countries\Delete.cshtml" />
-    <Content Include="Views\Countries\Details.cshtml" />
-    <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -282,6 +214,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineMenu.Service\OnlineMenu.Service.csproj">
+      <Project>{31b9373e-795f-41c6-98c1-fc61a864d010}</Project>
+      <Name>OnlineMenu.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,10 +23,10 @@ namespace OnlineMenu
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //Register Mapping
-            //Mapper.Initialize(cfg => cfg.AddProfile<Service.Mapping.AutoMapperProfile>());
+            Mapper.Initialize(cfg => cfg.AddProfile<Service.Mapping.AutoMapperProfile>());
 
             //Register Unity
-            //Service.DI.UnityConfig.RegisterComponents();
+            Service.DI.UnityConfig.RegisterComponents();
         }
 
         protected void Session_Start(Object sender, EventArgs e)

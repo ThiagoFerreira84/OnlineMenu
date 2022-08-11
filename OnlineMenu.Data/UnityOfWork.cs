@@ -1,4 +1,5 @@
-﻿using OnlineMenu.Model;
+﻿using OnlineMenu.Data.Repositories;
+using OnlineMenu.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace OnlineMenu.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly OnlineMenuEntities _context;
+
         public IRepository<Country> Country { get; private set; }
         public IRepository<Restaurant> Restaurant { get; private set; }
 
