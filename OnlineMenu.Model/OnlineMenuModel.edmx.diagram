@@ -4,31 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4cad066922794fcc9425d5b0c8732d55" Name="Diagram1">
-        <EntityTypeShape EntityType="OnlineMenuModel.Country" Width="1.5" PointX="0.75" PointY="9.375" />
-        <EntityTypeShape EntityType="OnlineMenuModel.MenuCategory" Width="1.5" PointX="5.25" PointY="9.5" />
-        <EntityTypeShape EntityType="OnlineMenuModel.MenuItem" Width="1.5" PointX="9.75" PointY="11.25" />
-        <EntityTypeShape EntityType="OnlineMenuModel.MenuSubCategory" Width="1.5" PointX="7.5" PointY="14.75" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Order" Width="1.5" PointX="7.5" PointY="10.75" />
-        <EntityTypeShape EntityType="OnlineMenuModel.OrderItem" Width="1.5" PointX="12" PointY="12" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Restaurant" Width="1.5" PointX="3" PointY="8.5" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Subscription" Width="1.5" PointX="5.25" PointY="13.25" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Table" Width="1.5" PointX="5.25" PointY="16" />
-        <EntityTypeShape EntityType="OnlineMenuModel.User" Width="1.5" PointX="5.25" PointY="6" />
-        <EntityTypeShape EntityType="OnlineMenuModel.UserType" Width="1.5" PointX="3" PointY="5.5" />
-        <AssociationConnector Association="OnlineMenuModel.FK_Restaurant_Country" />
-        <AssociationConnector Association="OnlineMenuModel.FK_MenuCategory_Restaurant" />
-        <AssociationConnector Association="OnlineMenuModel.FK_MenuItem_MenuCategory" />
-        <AssociationConnector Association="OnlineMenuModel.FK_MenuSubCategory_MenuSubCategory" />
-        <AssociationConnector Association="OnlineMenuModel.FK_MenuItem_MenuSubCategory" />
-        <AssociationConnector Association="OnlineMenuModel.FK_OrderItems_MenuItem" />
-        <AssociationConnector Association="OnlineMenuModel.FK_OrderItems_Order" />
-        <AssociationConnector Association="OnlineMenuModel.FK_Orders_Table" />
-        <AssociationConnector Association="OnlineMenuModel.FK_Orders_User" />
-        <AssociationConnector Association="OnlineMenuModel.FK_Subscription_Restaurant" />
-        <AssociationConnector Association="OnlineMenuModel.FK_Table_Restaurant" />
-        <AssociationConnector Association="OnlineMenuModel.FK_User_Restaurant" />
-        <AssociationConnector Association="OnlineMenuModel.FK_User_UserType" />
+      <Diagram DiagramId="568025e304e444ffa3a5c836dce35671" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineMenuModel.Country" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.MenuCategory" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.MenuItem" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.MenuSubCategory" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Order" Width="1.5" PointX="7.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.OrderItem" Width="1.5" PointX="12" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Restaurant" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Subscription" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Table" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.User" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineMenuModel.UserType" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="OnlineMenuModel.FK_Restaurant_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_MenuCategory_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_MenuItem_MenuCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_MenuSubCategory_MenuSubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_MenuItem_MenuSubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_OrderItems_MenuItem" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_OrderItems_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_Orders_Table" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_Orders_User" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_Subscription_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_Table_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_User_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineMenuModel.FK_User_UserType" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

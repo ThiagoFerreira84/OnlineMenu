@@ -33,6 +33,12 @@ namespace OnlineMenu.Service.Services
         public int Create(VMRestaurant vmEntity)
         {
             var entity = Mapper.Map<Restaurant>(vmEntity);
+            entity.Id = Guid.NewGuid();
+            entity.CreateDate = DateTime.Now;
+            entity.LastModifiedDate = DateTime.Now;
+
+            //Todo: Use the name of the user logged in
+            entity.LastModifiedBy = Environment.UserName;
             unitOfWork.Restaurant.Add(entity);
             return unitOfWork.SaveChanges();
         }

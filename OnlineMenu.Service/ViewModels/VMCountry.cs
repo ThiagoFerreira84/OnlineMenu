@@ -20,7 +20,5 @@ namespace OnlineMenu.Service.ViewModels
 
         [Display(Name = "Government Tax")]
         public decimal GovernmentTax { get; set; }
-
-        public virtual ICollection<VMRestaurant> Restaurants { get; set; }
     }
 }
