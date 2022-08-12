@@ -21,12 +21,16 @@ namespace OnlineMenu.Service.ViewModels
         public string Name { get; set; }
 
         public string Address { get; set; }
-        public byte[] Logo { get; set; }
 
-        [Display(Name = "Service Tax")]
+        [Display(Name = "Logo")]
+        public string LogoFileName { get; set; }
+
+        [Display(Name = "Service Tax (%)")]
         public Nullable<decimal> ServiceTax { get; set; }
 
+        [Display(Name = "Create Date")]
         public Nullable<System.DateTime> CreateDate { get; set; }
+
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string LastModifiedBy { get; set; }
 

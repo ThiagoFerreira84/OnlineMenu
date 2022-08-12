@@ -27,11 +27,11 @@ namespace OnlineMenu.Model
         public System.Guid CountryId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public byte[] Logo { get; set; }
         public Nullable<decimal> ServiceTax { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string LastModifiedBy { get; set; }
+        public string LogoFileName { get; set; }
     
         public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -18,7 +18,7 @@ namespace OnlineMenu.Service.ViewModels
         [Display(Name = "Currency Symbol")]
         public string CurrencySymbol { get; set; }
 
-        [Display(Name = "Government Tax")]
+        [Display(Name = "Government Tax (%)")]
         public decimal GovernmentTax { get; set; }
     }
 }

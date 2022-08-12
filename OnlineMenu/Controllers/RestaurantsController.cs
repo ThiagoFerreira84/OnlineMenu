@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Xml;
 using OnlineMenu.Service.Services;
 using OnlineMenu.Service.ViewModels;
+using static System.Net.WebRequestMethods;
 
 namespace OnlineMenu.Controllers
 {
@@ -43,15 +47,60 @@ namespace OnlineMenu.Controllers
 
         public ActionResult Edit(Guid id)
         {
-            return View(restaurantService.GetById(id));
+            var vmEntity = restaurantService.GetById(id);
+            ViewBag.Logo = string.Empty;
+
+            if (!string.IsNullOrEmpty(vmEntity.LogoFileName))
+            {
+                var folder = WebConfigurationManager.AppSettings["UploadImageFilePath"];
+                string logoFileName = vmEntity.LogoFileName;
+                string fileName = folder + logoFileName;
+                ViewBag.Logo = fileName;
+            }
+
+            return View(vmEntity);
         }
 
         [HttpPost]
-        public ActionResult Edit(VMRestaurant vmEntity)
+        public ActionResult Upload(VMRestaurant vmEntity)
         {
-            restaurantService.Update(vmEntity);
+            if (ModelState.IsValid)
+            {
+                //string path = Path.Combine(Server.MapPath("~" + folder), Path.GetFileName(vmEntity.LogoFileName));
+
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var folder = WebConfigurationManager.AppSettings["UploadImageFilePath"];
+                        string logoFileName = Path.GetFileName(Guid.NewGuid() + file.FileName);
+                        vmEntity.LogoFileName = logoFileName;
+                        string _path = Path.Combine(Server.MapPath(folder), logoFileName);
+                        file.SaveAs(_path);
+                    }
+                }
+
+                if (vmEntity.Id == new Guid())
+                {
+                    restaurantService.Create(vmEntity);
+                }
+                else
+                {
+                    restaurantService.Update(vmEntity);
+                }
+            }
+
             return RedirectToAction("Index");
         }
+
+        //[HttpPost]
+        //public ActionResult Edit(VMRestaurant vmEntity)
+        //{
+        //    restaurantService.Update(vmEntity);
+        //    return RedirectToAction("Index");
+        //}
 
         //public ActionResult Delete(Guid id)
         //{

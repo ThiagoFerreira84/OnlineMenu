@@ -58,6 +58,8 @@ namespace OnlineMenu.Service.Services
         public int Update(VMRestaurant vmEntity)
         {
             var entity = Mapper.Map<Restaurant>(vmEntity);
+            entity.LastModifiedDate = DateTime.Now;
+            entity.LastModifiedBy = Environment.UserName;
             unitOfWork.Restaurant.Update(entity);
             return unitOfWork.SaveChanges();
         }
