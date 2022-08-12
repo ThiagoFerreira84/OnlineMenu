@@ -5,6 +5,7 @@ using OnlineMenu.Service.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace OnlineMenu.Service.Services
         int Update(VMRestaurant entity);
 
         List<VMRestaurant> GetAll();
+
+        List<VMViewRestaurant> GetAllView();
     }
 
     public class RestaurantService : IRestaurantService
@@ -47,6 +50,16 @@ namespace OnlineMenu.Service.Services
         {
             var entities = unitOfWork.Restaurant.GetAll();
             return Mapper.Map<List<VMRestaurant>>(entities);
+        }
+
+        public List<VMViewRestaurant> GetAllView()
+        {
+            using (var dbContext = new OnlineMenuEntities())
+            {
+                var entities = dbContext.ViewRestaurants.ToList();
+                var vmEntity = Mapper.Map<List<VMViewRestaurant>>(entities);
+                return vmEntity;
+            }
         }
 
         public VMRestaurant GetById(Guid Id)

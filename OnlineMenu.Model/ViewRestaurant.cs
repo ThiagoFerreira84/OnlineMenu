@@ -14,6 +14,7 @@ namespace OnlineMenu.Model
     
     public partial class ViewRestaurant
     {
+        public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public Nullable<decimal> ServiceTax { get; set; }

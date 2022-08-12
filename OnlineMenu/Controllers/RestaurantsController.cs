@@ -29,18 +29,8 @@ namespace OnlineMenu.Controllers
 
         public ActionResult Index()
         {
-            var restaurants = restaurantService.GetAll();
-            foreach (var restaurant in restaurants)
-            {
-                if (!string.IsNullOrEmpty(restaurant.LogoFileName))
-                {
-                    restaurant.LogoPath = AppManager.GetLogosFilePath() + restaurant.LogoFileName;
-                }
-                else
-                {
-                    restaurant.LogoPath = string.Empty;
-                }
-            }
+            var restaurants = restaurantService.GetAllView();
+
             return View(restaurants);
         }
 

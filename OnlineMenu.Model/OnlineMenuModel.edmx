@@ -149,11 +149,13 @@
 warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewRestaurants">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="CountryName" />
             <PropertyRef Name="GovernmentTax" />
             <PropertyRef Name="CurrencySymbol" />
           </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="ServiceTax" Type="decimal" Precision="18" Scale="0" />
@@ -338,6 +340,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViewRestaurants" EntityType="Self.ViewRestaurants" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [ViewRestaurants].[Id] AS [Id], 
     [ViewRestaurants].[Name] AS [Name], 
     [ViewRestaurants].[Address] AS [Address], 
     [ViewRestaurants].[ServiceTax] AS [ServiceTax], 
@@ -644,11 +647,13 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
         </EntityType>
         <EntityType Name="ViewRestaurant">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="CountryName" />
             <PropertyRef Name="GovernmentTax" />
             <PropertyRef Name="CurrencySymbol" />
           </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ServiceTax" Type="Decimal" Precision="18" Scale="0" />
@@ -990,6 +995,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
                 <ScalarProperty Name="ServiceTax" ColumnName="ServiceTax" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

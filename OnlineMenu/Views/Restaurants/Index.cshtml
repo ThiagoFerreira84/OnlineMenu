@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMRestaurant>
+﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMViewRestaurant>
 
 @{
     ViewBag.Title = "Index";
@@ -24,13 +24,14 @@
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Country.CountryName)
+            @Html.DisplayNameFor(model => model.CountryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ServiceTax)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
         </th>
         <th></th>
     </tr>
@@ -52,13 +53,20 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Country.CountryName)
+                @Html.DisplayFor(modelItem => item.CountryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ServiceTax)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Tables", new {Id = item.Id})';return false;">
+                    <span class="fa fa-plus-circle"></span> Tables (@item.NoOfTables)
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Menu", new {Id = item.Id})';return false;">
+                    <span class="fa fa-plus-circle"></span> Menu
+                </button>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
