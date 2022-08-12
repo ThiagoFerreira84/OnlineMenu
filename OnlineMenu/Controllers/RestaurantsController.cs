@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Xml;
+using OnlineMenu.Service.Managers;
 using OnlineMenu.Service.Services;
 using OnlineMenu.Service.ViewModels;
 using static System.Net.WebRequestMethods;
@@ -33,7 +34,7 @@ namespace OnlineMenu.Controllers
             {
                 if (!string.IsNullOrEmpty(restaurant.LogoFileName))
                 {
-                    restaurant.LogoPath = WebConfigurationManager.AppSettings["UploadImageFilePath"] + restaurant.LogoFileName;
+                    restaurant.LogoPath = AppManager.GetLogosFilePath() + restaurant.LogoFileName;
                 }
                 else
                 {
@@ -57,7 +58,7 @@ namespace OnlineMenu.Controllers
 
             if (!string.IsNullOrEmpty(vmEntity.LogoFileName))
             {
-                var folder = WebConfigurationManager.AppSettings["UploadImageFilePath"];
+                var folder = AppManager.GetLogosFilePath();
                 string logoFileName = vmEntity.LogoFileName;
                 string fileName = folder + logoFileName;
                 ViewBag.Logo = fileName;
@@ -79,7 +80,7 @@ namespace OnlineMenu.Controllers
 
                     if (file != null && file.ContentLength > 0)
                     {
-                        var folder = WebConfigurationManager.AppSettings["UploadImageFilePath"];
+                        var folder = AppManager.GetLogosFilePath();
                         string logoFileName = Path.GetFileName(vmEntity.Id + file.FileName);
                         vmEntity.LogoFileName = logoFileName;
                         string _path = Path.Combine(Server.MapPath(folder), logoFileName);
@@ -107,7 +108,7 @@ namespace OnlineMenu.Controllers
 
             if (!string.IsNullOrEmpty(vmEntity.LogoFileName))
             {
-                var folder = WebConfigurationManager.AppSettings["UploadImageFilePath"];
+                var folder = AppManager.GetLogosFilePath();
                 string logoFileName = vmEntity.LogoFileName;
                 string fileName = folder + logoFileName;
                 ViewBag.Logo = fileName;

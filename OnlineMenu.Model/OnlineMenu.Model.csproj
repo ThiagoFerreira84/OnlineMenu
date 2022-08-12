@@ -90,6 +90,9 @@
     <Compile Include="Restaurant.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Setting.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Subscription.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
@@ -103,6 +106,9 @@
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserType.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewRestaurant.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
