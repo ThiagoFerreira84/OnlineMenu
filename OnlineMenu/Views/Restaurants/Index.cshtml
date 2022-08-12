@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
+            Logo
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
@@ -28,7 +31,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
-        </th>       
+        </th>
         <th></th>
     </tr>
 
@@ -38,6 +41,12 @@
 
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.LogoPath))
+                {
+                    <img src="@Url.Content(item.LogoPath)" alt="IMAGES" height="40px;" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)

@@ -33,10 +33,11 @@ namespace OnlineMenu.Service.ViewModels
 
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string LastModifiedBy { get; set; }
+        public Nullable<bool> IskitchenOpen { get; set; }
+        public string LogoPath { get; set; }
 
         public VMCountry Country { get; set; }
         public virtual ICollection<VMMenuCategory> MenuCategories { get; set; }
-
         public virtual ICollection<VMSubscription> Subscriptions { get; set; }
         public virtual ICollection<VMTable> Tables { get; set; }
         public virtual ICollection<VMUser> Users { get; set; }

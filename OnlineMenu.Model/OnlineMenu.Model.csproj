@@ -93,6 +93,9 @@
     <Compile Include="Subscription.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Table.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>

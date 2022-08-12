@@ -61,6 +61,7 @@ namespace OnlineMenu.Service.Services
             entity.LastModifiedDate = DateTime.Now;
             entity.LastModifiedBy = Environment.UserName;
             unitOfWork.Restaurant.Update(entity);
+
             return unitOfWork.SaveChanges();
         }
     }

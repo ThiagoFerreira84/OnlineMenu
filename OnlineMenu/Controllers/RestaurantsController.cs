@@ -28,7 +28,19 @@ namespace OnlineMenu.Controllers
 
         public ActionResult Index()
         {
-            return View(restaurantService.GetAll());
+            var restaurants = restaurantService.GetAll();
+            foreach (var restaurant in restaurants)
+            {
+                if (!string.IsNullOrEmpty(restaurant.LogoFileName))
+                {
+                    restaurant.LogoPath = WebConfigurationManager.AppSettings["UploadImageFilePath"] + restaurant.LogoFileName;
+                }
+                else
+                {
+                    restaurant.LogoPath = string.Empty;
+                }
+            }
+            return View(restaurants);
         }
 
         public ActionResult Create()
@@ -36,13 +48,6 @@ namespace OnlineMenu.Controllers
             ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName");
 
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(VMRestaurant vmEntity)
-        {
-            restaurantService.Create(vmEntity);
-            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(Guid id)
@@ -75,7 +80,7 @@ namespace OnlineMenu.Controllers
                     if (file != null && file.ContentLength > 0)
                     {
                         var folder = WebConfigurationManager.AppSettings["UploadImageFilePath"];
-                        string logoFileName = Path.GetFileName(Guid.NewGuid() + file.FileName);
+                        string logoFileName = Path.GetFileName(vmEntity.Id + file.FileName);
                         vmEntity.LogoFileName = logoFileName;
                         string _path = Path.Combine(Server.MapPath(folder), logoFileName);
                         file.SaveAs(_path);
@@ -95,23 +100,20 @@ namespace OnlineMenu.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpPost]
-        //public ActionResult Edit(VMRestaurant vmEntity)
-        //{
-        //    restaurantService.Update(vmEntity);
-        //    return RedirectToAction("Index");
-        //}
+        public ActionResult Details(Guid id)
+        {
+            var vmEntity = restaurantService.GetById(id);
+            ViewBag.Logo = string.Empty;
 
-        //public ActionResult Delete(Guid id)
-        //{
-        //    return View(restaurantService.GetById(id));
-        //}
+            if (!string.IsNullOrEmpty(vmEntity.LogoFileName))
+            {
+                var folder = WebConfigurationManager.AppSettings["UploadImageFilePath"];
+                string logoFileName = vmEntity.LogoFileName;
+                string fileName = folder + logoFileName;
+                ViewBag.Logo = fileName;
+            }
 
-        //[HttpPost]
-        //public ActionResult Delete(VMRestaurant vmEntity)
-        //{
-        //    restaurantService.Delete(vmEntity.Id);
-        //    return RedirectToAction("Index");
-        //}
+            return View(vmEntity);
+        }
     }
 }

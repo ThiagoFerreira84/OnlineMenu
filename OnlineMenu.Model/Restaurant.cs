@@ -32,6 +32,7 @@ namespace OnlineMenu.Model
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string LastModifiedBy { get; set; }
         public string LogoFileName { get; set; }
+        public Nullable<bool> IskitchenOpen { get; set; }
     
         public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
