@@ -17,9 +17,8 @@ namespace OnlineMenu.Service.DI
         public static void RegisterComponents()
         {
             var container = new UnityContainer();
-            //container.RegisterType<ITypeService, TypeService>(new ContainerControlledLifetimeManager());
             container.RegisterType<ICountryService, CountryService>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IRepository<Restaurant>, Repository<Restaurant>>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IRestaurantService, RestaurantService>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IUnitOfWork, UnitOfWork>(new ContainerControlledLifetimeManager());
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

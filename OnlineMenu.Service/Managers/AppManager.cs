@@ -14,6 +14,24 @@ namespace OnlineMenu.Service.Managers
 {
     public class AppManager
     {
+        public static void SetInitialSessions()
+        {
+            try
+            {
+                var db = new OnlineMenuEntities();
+                var LogosFilePath = db.Settings.First().LogosFilePath;
+                HttpContext.Current.Session["LogosFilePath"] = LogosFilePath;
+            }
+            catch
+            {
+            }
+        }
+
+        public static string GetLogosFilePath()
+        {
+            return (String)System.Web.HttpContext.Current.Session["LogosFilePath"];
+        }
+
         public static VMUser SetCurrentUserInfo(string domainName)
         {
             if (string.IsNullOrEmpty(domainName))
@@ -56,33 +74,6 @@ namespace OnlineMenu.Service.Managers
             HttpContext.Current.Session.Add("_SessionUser", vmUser);
 
             return vmUser;
-        }
-
-        public static void SetEnvironmentSessions()
-        {
-            try
-            {
-                var conn = ConfigurationManager.ConnectionStrings["OnlineMenuEntities"].ConnectionString;
-                var conBuilder = new EntityConnectionStringBuilder(conn);
-                var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(conBuilder.ProviderConnectionString);
-
-                var environment = "Live";
-                //if (conn.ToLower().Contains("somsqlt2"))
-                //{
-                //    environment = "Test";
-                //}
-                //else if (conn.ToLower().Contains("somsqld1"))
-                //{
-                //    environment = "Development";
-                //}
-
-                HttpContext.Current.Session["__Environment"] = environment;
-                HttpContext.Current.Session["__DbName"] = sqlConnectionStringBuilder.InitialCatalog;
-                HttpContext.Current.Session["__DbServer"] = sqlConnectionStringBuilder.DataSource;
-            }
-            catch
-            {
-            }
         }
     }
 }

@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="UnityOfWork.cs" />
   </ItemGroup>
@@ -69,6 +68,9 @@
       <Project>{55FA4676-88A2-4A98-82A6-33B2B2AEFF6F}</Project>
       <Name>OnlineMenu.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

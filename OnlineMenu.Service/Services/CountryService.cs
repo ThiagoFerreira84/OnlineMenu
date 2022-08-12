@@ -4,6 +4,7 @@ using OnlineMenu.Model;
 using OnlineMenu.Service.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,12 @@ namespace OnlineMenu.Service.Services
 
         public List<VMCountry> GetAll()
         {
+            //using (var dbContext = new OnlineMenuEntities())
+            //{
+            //    var entities = dbContext.Countries.Include(x => x.Restaurants).ToList();
+            //    var vmEntity = Mapper.Map<List<VMCountry>>(entities);
+            //    return vmEntity;
+            //}
             var entities = unitOfWork.Country.GetAll();
             return Mapper.Map<List<VMCountry>>(entities);
         }

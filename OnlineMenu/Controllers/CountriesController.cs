@@ -13,20 +13,18 @@ namespace OnlineMenu.Controllers
 {
     public class CountriesController : Controller
     {
-        private ICountryService countryServie;
+        private ICountryService countryService;
 
         public CountriesController(ICountryService countryServie)
         {
-            this.countryServie = countryServie;
+            this.countryService = countryServie;
         }
 
-        // GET: Countries
         public ActionResult Index()
         {
-            return View(countryServie.GetAll());
+            return View(countryService.GetAll());
         }
 
-        // GET: Countries/Create
         public ActionResult Create()
         {
             return View();
@@ -35,31 +33,31 @@ namespace OnlineMenu.Controllers
         [HttpPost]
         public ActionResult Create(VMCountry vmEntity)
         {
-            countryServie.Create(vmEntity);
+            countryService.Create(vmEntity);
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(Guid id)
         {
-            return View(countryServie.GetById(id));
+            return View(countryService.GetById(id));
         }
 
         [HttpPost]
         public ActionResult Edit(VMCountry vmEntity)
         {
-            countryServie.Update(vmEntity);
+            countryService.Update(vmEntity);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(Guid id)
         {
-            return View(countryServie.GetById(id));
+            return View(countryService.GetById(id));
         }
 
         [HttpPost]
         public ActionResult Delete(VMCountry vmEntity)
         {
-            countryServie.Delete(vmEntity.Id);
+            countryService.Delete(vmEntity.Id);
             return RedirectToAction("Index");
         }
     }

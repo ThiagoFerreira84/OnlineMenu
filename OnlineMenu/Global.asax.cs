@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OnlineMenu.Service.Managers;
 
 //using OnlineMenu.Service.Managers;
 using System;
@@ -31,11 +32,9 @@ namespace OnlineMenu
 
         protected void Session_Start(Object sender, EventArgs e)
         {
+            AppManager.SetInitialSessions();
             //Set User or replaced user
             //AppManager.SetCurrentUserInfo(string.Empty);
-
-            //Set information about Server and Database
-            //AppManager.SetEnvironmentSessions();
 
             // Register global filter
             //GlobalFilters.Filters.Add(new ActionFilter());

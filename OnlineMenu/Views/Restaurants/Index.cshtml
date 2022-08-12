@@ -1,0 +1,78 @@
+﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMViewRestaurant>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Restaurants</h2>
+
+<p>
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "Restaurants")';return false;">
+        <span class="fa fa-plus-circle"></span> Create
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Logo
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceTax)
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.LogoPath))
+                {
+                    <img src="@Url.Content(item.LogoPath)" alt="IMAGES" height="40px;" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceTax)
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Tables", new {Id = item.Id})';return false;">
+                    <span class="fa fa-plus-circle"></span> Tables (@item.NoOfTables)
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Menu", new {Id = item.Id})';return false;">
+                    <span class="fa fa-plus-circle"></span> Menu
+                </button>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
