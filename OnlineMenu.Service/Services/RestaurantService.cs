@@ -13,7 +13,7 @@ namespace OnlineMenu.Service.Services
 {
     public interface IRestaurantService
     {
-        VMRestaurant GetById(Guid Id);
+        VMRestaurant GetById(Guid id);
 
         int Create(VMRestaurant entity);
 
@@ -62,9 +62,9 @@ namespace OnlineMenu.Service.Services
             }
         }
 
-        public VMRestaurant GetById(Guid Id)
+        public VMRestaurant GetById(Guid id)
         {
-            var entity = unitOfWork.Restaurant.Get(Id);
+            var entity = unitOfWork.Restaurant.Get(id);
             return Mapper.Map<VMRestaurant>(entity);
         }
 

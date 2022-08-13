@@ -13,13 +13,13 @@ namespace OnlineMenu.Service.Services
 {
     public interface ICountryService
     {
-        VMCountry GetById(Guid Id);
+        VMCountry GetById(Guid id);
 
         int Create(VMCountry entity);
 
         int Update(VMCountry entity);
 
-        void Delete(Guid Id);
+        void Delete(Guid id);
 
         List<VMCountry> GetAll();
     }
@@ -53,9 +53,9 @@ namespace OnlineMenu.Service.Services
             return Mapper.Map<List<VMCountry>>(entities);
         }
 
-        public VMCountry GetById(Guid Id)
+        public VMCountry GetById(Guid id)
         {
-            var entity = unitOfWork.Country.Get(Id);
+            var entity = unitOfWork.Country.Get(id);
             return Mapper.Map<VMCountry>(entity);
         }
 
@@ -66,9 +66,9 @@ namespace OnlineMenu.Service.Services
             return unitOfWork.SaveChanges();
         }
 
-        public void Delete(Guid Id)
+        public void Delete(Guid id)
         {
-            var entity = Mapper.Map<Country>(GetById(Id));
+            var entity = Mapper.Map<Country>(GetById(id));
             unitOfWork.Country.Remove(entity);
             return;
         }
