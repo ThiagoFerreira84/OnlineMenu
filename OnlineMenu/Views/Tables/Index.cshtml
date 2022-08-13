@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMTable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tables of @ViewBag.RestaurantName</h2>
+
+<hr />
+<h4>
+    Total number of tables at @ViewBag.RestaurantName is: @ViewBag.TotalOfTables
+</h4>
+
+<p>
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("AddOrRemove", "Tables", new { restaurantId = ViewBag.RestaurantId })';return false;">
+        <span class="fa fa-plus-circle"></span> Edit
+    </button>
+</p>
+
+<br />
+<div>
+    @Html.ActionLink("Return", "Index", "Restaurants")
+</div>
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
+        }
+    </table>*@

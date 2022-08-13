@@ -13,7 +13,7 @@ namespace OnlineMenu.Service.ViewModels
         public int Number { get; set; }
         public string Status { get; set; }
 
-        public virtual ICollection<VMOrder> Orders { get; set; }
-        public virtual VMRestaurant Restaurant { get; set; }
+        //public virtual ICollection<VMOrder> Orders { get; set; }
+        //public virtual VMRestaurant Restaurant { get; set; }
     }
 }

@@ -20,21 +20,27 @@ namespace OnlineMenu.Controllers
             this.tableService = tableServie;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(Guid restaurantId, string restaurantName)
         {
-            return View(tableService.GetAll());
+            ViewBag.RestaurantId = restaurantId;
+            ViewBag.RestaurantName = restaurantName;
+            var tables = tableService.GetByRestaurantId(restaurantId);
+
+            ViewBag.TotalOfTables = tables.Count;
+            return View(tables);
         }
 
-        public ActionResult Create()
+        public ActionResult AddOrRemove(Guid restaurantId)
         {
+            ViewBag.RestaurantId = restaurantId;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(VMTable vmEntity)
+        public ActionResult AddOrRemove(VMTable vmEntity)
         {
-            tableService.Create(vmEntity);
-            return RedirectToAction("Index");
+            tableService.AddOrRemove(vmEntity);
+            return RedirectToAction("Index", "Restaurants");
         }
 
         public ActionResult Edit(Guid id)

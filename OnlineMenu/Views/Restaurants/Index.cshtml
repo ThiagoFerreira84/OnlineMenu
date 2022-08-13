@@ -59,12 +59,12 @@
                 @Html.DisplayFor(modelItem => item.ServiceTax)
             </td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Tables", new {Id = item.Id})';return false;">
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Tables", new {restaurantId = item.Id, restaurantName = item.Name})';return false;">
                     <span class="fa fa-plus-circle"></span> Tables (@item.NoOfTables)
                 </button>
             </td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Menu", new {Id = item.Id})';return false;">
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "Menu", new {restaurantId = item.Id, restaurantName = item.Name})';return false;">
                     <span class="fa fa-plus-circle"></span> Menu
                 </button>
             </td>

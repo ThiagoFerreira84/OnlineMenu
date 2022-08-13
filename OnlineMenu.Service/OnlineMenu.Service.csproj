@@ -129,6 +129,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="DI\UnityConfig.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Managers\AppManager.cs" />
     <Compile Include="Mapping\AutoMapperProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
