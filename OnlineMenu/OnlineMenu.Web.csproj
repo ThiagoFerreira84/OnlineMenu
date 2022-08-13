@@ -208,6 +208,7 @@
     <Content Include="Views\Tables\Index.cshtml" />
     <Content Include="Views\Tables\AddOrRemove.cshtml" />
     <Content Include="Views\MenuCategories\Index.cshtml" />
+    <Content Include="Views\MenuCategories\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

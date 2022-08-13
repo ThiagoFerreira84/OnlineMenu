@@ -5,18 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Menu Categories</h2>
+<h2>Menu Categories (@ViewBag.RestaurantName)</h2>
 
 <p>
-    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "MenuCategories")';return false;">
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "MenuCategories", new {restaurantId = ViewBag.RestaurantId })';return false;">
         <span class="fa fa-plus-circle"></span> Create
     </button>
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RestaurantId)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -35,9 +32,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>

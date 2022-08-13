@@ -56,7 +56,7 @@ namespace OnlineMenu.Service.Services
 
         public List<VMMenuCategory> GetByRestaurantId(Guid id)
         {
-            var entities = unitOfWork.MenuCategory.Find(t => t.RestaurantId == id).ToList();
+            var entities = unitOfWork.MenuCategory.Find(t => t.RestaurantId == id).OrderBy(t=>t.Sequence).ToList();
             return Mapper.Map<List<VMMenuCategory>>(entities);
         }
 
