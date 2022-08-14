@@ -12,27 +12,23 @@ namespace OnlineMenu.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class MenuCategory
+    public partial class SubCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MenuCategory()
+        public SubCategory()
         {
-            this.MenuItems = new HashSet<MenuItem>();
-            this.MenuSubCategories = new HashSet<MenuSubCategory>();
+            this.SubCategoryVsItems = new HashSet<SubCategoryVsItem>();
         }
     
         public System.Guid Id { get; set; }
-        public System.Guid RestaurantId { get; set; }
-        public string Title { get; set; }
+        public System.Guid CategoryId { get; set; }
+        public string Tittle { get; set; }
         public string Subtitle { get; set; }
         public string Footer { get; set; }
-        public byte[] BackgroundImage { get; set; }
-        public Nullable<int> Sequence { get; set; }
+        public Nullable<int> Sequency { get; set; }
     
-        public virtual Restaurant Restaurant { get; set; }
+        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MenuItem> MenuItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MenuSubCategory> MenuSubCategories { get; set; }
+        public virtual ICollection<SubCategoryVsItem> SubCategoryVsItems { get; set; }
     }
 }

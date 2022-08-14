@@ -213,6 +213,7 @@
     <Content Include="Views\MenuCategories\Edit.cshtml" />
     <Content Include="Views\MenuItemsCategory\Index.cshtml" />
     <Content Include="Views\MenuItemsCategory\Create.cshtml" />
+    <Content Include="Views\MenuItemsCategory\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

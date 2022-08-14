@@ -18,6 +18,7 @@ namespace OnlineMenu.Model
         public User()
         {
             this.Orders = new HashSet<Order>();
+            this.UserVsRestaurants = new HashSet<UserVsRestaurant>();
         }
     
         public System.Guid Id { get; set; }
@@ -31,5 +32,7 @@ namespace OnlineMenu.Model
         public virtual ICollection<Order> Orders { get; set; }
         public virtual Restaurant Restaurant { get; set; }
         public virtual UserType UserType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserVsRestaurant> UserVsRestaurants { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 
 <h2>Create Menu Item</h2>
 
-@using (Html.BeginForm("CreateOrUpdate", "MenuItemsCategory", FormMethod.Post, new { enctype = "multipart/form-data", @id = "form-create-external-link" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.MenuCategoryId)
@@ -92,6 +92,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @if (ViewBag.Logo != string.Empty)
+                {
+                    <img src="@Url.Content(@ViewBag.Photo)" alt="IMAGES" width="120px;" />
+                }
+
                 <input type="file" name="fileUpload" id="fileDialog" />
             </div>
         </div>
@@ -106,14 +111,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" id="CreateOrUpdate" class="btn btn-primary btn-sm" />
+                <input type="submit" value="CreateOrUpdate" id="Submit" class="btn btn-primary btn-sm" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { menuCategoryId = Model.MenuCategoryId })
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

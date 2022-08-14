@@ -15,15 +15,16 @@ namespace OnlineMenu.Service.ViewModels
 
         [Required]
         public string Name { get; set; }
+
         public string Description { get; set; }
-        public Nullable<bool> Vegan { get; set; }
-        public Nullable<bool> Vegetarian { get; set; }
+        public bool Vegan { get; set; }
+        public bool Vegetarian { get; set; }
 
         [Display(Name = "Gluten Free")]
-        public Nullable<bool> GlutenFree { get; set; }
+        public bool GlutenFree { get; set; }
 
         [Display(Name = "Chef Recommendation")]
-        public Nullable<bool> ChefRecommendation { get; set; }
+        public bool ChefRecommendation { get; set; }
 
         [Required]
         [Display(Name = "Price Small (Default)")]

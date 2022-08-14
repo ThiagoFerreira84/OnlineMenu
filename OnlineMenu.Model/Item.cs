@@ -12,17 +12,17 @@ namespace OnlineMenu.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class MenuItem
+    public partial class Item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MenuItem()
+        public Item()
         {
+            this.CategoryVsItems = new HashSet<CategoryVsItem>();
             this.OrderItems = new HashSet<OrderItem>();
+            this.SubCategoryVsItems = new HashSet<SubCategoryVsItem>();
         }
     
         public System.Guid Id { get; set; }
-        public System.Guid MenuCategoryId { get; set; }
-        public System.Guid MenuSubCategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<bool> Vegan { get; set; }
@@ -35,9 +35,11 @@ namespace OnlineMenu.Model
         public Nullable<int> Sequence { get; set; }
         public string Photo { get; set; }
     
-        public virtual MenuCategory MenuCategory { get; set; }
-        public virtual MenuSubCategory MenuSubCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryVsItem> CategoryVsItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubCategoryVsItem> SubCategoryVsItems { get; set; }
     }
 }

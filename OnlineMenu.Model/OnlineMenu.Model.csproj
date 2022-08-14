@@ -53,16 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryVsItem.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Country.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MenuCategory.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MenuItem.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MenuSubCategory.cs">
+    <Compile Include="Item.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OnlineMenuModel.Context.cs">
@@ -93,6 +93,12 @@
     <Compile Include="Setting.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SubCategory.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubCategoryVsItem.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Subscription.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
@@ -106,6 +112,9 @@
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserType.cs">
+      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserVsRestaurant.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewRestaurant.cs">

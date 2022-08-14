@@ -12,15 +12,13 @@ namespace OnlineMenu.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderItem
+    public partial class UserVsRestaurant
     {
         public System.Guid Id { get; set; }
-        public System.Guid OrderId { get; set; }
-        public System.Guid ItemId { get; set; }
-        public int Quantity { get; set; }
-        public string Notes { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid RestaurantId { get; set; }
     
-        public virtual Item Item { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
+        public virtual User User { get; set; }
     }
 }

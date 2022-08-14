@@ -5,16 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OnlineMenuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="GovernmentTax" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MenuCategory">
+        <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -26,13 +17,28 @@
           <Property Name="BackgroundImage" Type="image" />
           <Property Name="Sequence" Type="int" />
         </EntityType>
-        <EntityType Name="MenuItem">
+        <EntityType Name="CategoryVsItem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MenuCategoryId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MenuSubCategoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MenuItemId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GovernmentTax" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Vegan" Type="bit" />
@@ -44,17 +50,6 @@
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="Sequence" Type="int" />
           <Property Name="Photo" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="MenuSubCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MenuCategoryId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Tittle" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Subtitle" Type="nvarchar(max)" />
-          <Property Name="Footer" Type="nvarchar(max)" />
-          <Property Name="Sequency" Type="int" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -73,7 +68,7 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MenuItemId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
@@ -98,6 +93,25 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="LogosFilePath" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Tittle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subtitle" Type="nvarchar(max)" />
+          <Property Name="Footer" Type="nvarchar(max)" />
+          <Property Name="Sequency" Type="int" />
+        </EntityType>
+        <EntityType Name="SubCategoryVsItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubCategoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Subscription">
           <Key>
@@ -145,6 +159,14 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="UserVsRestaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RestaurantId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewRestaurants">
@@ -168,75 +190,63 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="MenuCategories" Type="int" />
           <Property Name="Users" Type="int" />
         </EntityType>
-        <Association Name="FK_MenuCategory_Restaurant">
-          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
-          <End Role="MenuCategory" Type="Self.MenuCategory" Multiplicity="*" />
+        <Association Name="FK_CategoryVsItem_MenuCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryVsItem" Type="Self.CategoryVsItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Restaurant">
+            <Principal Role="Category">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="MenuCategory">
-              <PropertyRef Name="RestaurantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuItem_MenuCategory">
-          <End Role="MenuCategory" Type="Self.MenuCategory" Multiplicity="1" />
-          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuItem">
+            <Dependent Role="CategoryVsItem">
               <PropertyRef Name="MenuCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MenuItem_MenuSubCategory">
-          <End Role="MenuSubCategory" Type="Self.MenuSubCategory" Multiplicity="1" />
-          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+        <Association Name="FK_CategoryVsItem_MenuItem">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="CategoryVsItem" Type="Self.CategoryVsItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MenuSubCategory">
+            <Principal Role="Item">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="MenuItem">
-              <PropertyRef Name="MenuSubCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuSubCategory_MenuSubCategory">
-          <End Role="MenuCategory" Type="Self.MenuCategory" Multiplicity="1" />
-          <End Role="MenuSubCategory" Type="Self.MenuSubCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuSubCategory">
-              <PropertyRef Name="MenuCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderItems_MenuItem">
-          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
-          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuItem">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderItems">
+            <Dependent Role="CategoryVsItem">
               <PropertyRef Name="MenuItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItems_Order">
+        <Association Name="FK_MenuCategory_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Order1">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="OrderItems">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,6 +283,42 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             </Principal>
             <Dependent Role="Restaurant">
               <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategory_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoryVsItem_Item1">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SubCategoryVsItem" Type="Self.SubCategoryVsItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategoryVsItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoryVsItem_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="1" />
+          <End Role="SubCategoryVsItem" Type="Self.SubCategoryVsItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategoryVsItem">
+              <PropertyRef Name="SubCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -324,20 +370,47 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserVsRestaurant_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="UserVsRestaurant" Type="Self.UserVsRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserVsRestaurant">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserVsRestaurant_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserVsRestaurant" Type="Self.UserVsRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserVsRestaurant">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OnlineMenuModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryVsItem" EntityType="Self.CategoryVsItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MenuCategory" EntityType="Self.MenuCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MenuItem" EntityType="Self.MenuItem" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MenuSubCategory" EntityType="Self.MenuSubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategoryVsItem" EntityType="Self.SubCategoryVsItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserVsRestaurant" EntityType="Self.UserVsRestaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViewRestaurants" EntityType="Self.ViewRestaurants" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewRestaurants].[Id] AS [Id], 
@@ -354,27 +427,23 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
     [ViewRestaurants].[Users] AS [Users]
     FROM [dbo].[ViewRestaurants] AS [ViewRestaurants]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_CategoryVsItem_MenuCategory" Association="Self.FK_CategoryVsItem_MenuCategory">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryVsItem" EntitySet="CategoryVsItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryVsItem_MenuItem" Association="Self.FK_CategoryVsItem_MenuItem">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="CategoryVsItem" EntitySet="CategoryVsItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_MenuCategory_Restaurant" Association="Self.FK_MenuCategory_Restaurant">
             <End Role="Restaurant" EntitySet="Restaurant" />
-            <End Role="MenuCategory" EntitySet="MenuCategory" />
+            <End Role="Category" EntitySet="Category" />
           </AssociationSet>
-          <AssociationSet Name="FK_MenuItem_MenuCategory" Association="Self.FK_MenuItem_MenuCategory">
-            <End Role="MenuCategory" EntitySet="MenuCategory" />
-            <End Role="MenuItem" EntitySet="MenuItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuItem_MenuSubCategory" Association="Self.FK_MenuItem_MenuSubCategory">
-            <End Role="MenuSubCategory" EntitySet="MenuSubCategory" />
-            <End Role="MenuItem" EntitySet="MenuItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuSubCategory_MenuSubCategory" Association="Self.FK_MenuSubCategory_MenuSubCategory">
-            <End Role="MenuCategory" EntitySet="MenuCategory" />
-            <End Role="MenuSubCategory" EntitySet="MenuSubCategory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderItems_MenuItem" Association="Self.FK_OrderItems_MenuItem">
-            <End Role="MenuItem" EntitySet="MenuItem" />
+          <AssociationSet Name="FK_OrderItems_Item" Association="Self.FK_OrderItems_Item">
+            <End Role="Item" EntitySet="Item" />
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderItems_Order" Association="Self.FK_OrderItems_Order">
+          <AssociationSet Name="FK_OrderItems_Order1" Association="Self.FK_OrderItems_Order1">
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
@@ -389,6 +458,18 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <AssociationSet Name="FK_Restaurant_Country" Association="Self.FK_Restaurant_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Restaurant" EntitySet="Restaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoryVsItem_Item1" Association="Self.FK_SubCategoryVsItem_Item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SubCategoryVsItem" EntitySet="SubCategoryVsItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoryVsItem_SubCategory" Association="Self.FK_SubCategoryVsItem_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="SubCategoryVsItem" EntitySet="SubCategoryVsItem" />
           </AssociationSet>
           <AssociationSet Name="FK_Subscription_Restaurant" Association="Self.FK_Subscription_Restaurant">
             <End Role="Restaurant" EntitySet="Restaurant" />
@@ -406,51 +487,66 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserVsRestaurant_Restaurant" Association="Self.FK_UserVsRestaurant_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="UserVsRestaurant" EntitySet="UserVsRestaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserVsRestaurant_User" Association="Self.FK_UserVsRestaurant_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserVsRestaurant" EntitySet="UserVsRestaurant" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineMenuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="OnlineMenuEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="OnlineMenuModel.Category" />
+          <EntitySet Name="CategoryVsItems" EntityType="OnlineMenuModel.CategoryVsItem" />
           <EntitySet Name="Countries" EntityType="OnlineMenuModel.Country" />
-          <EntitySet Name="MenuCategories" EntityType="OnlineMenuModel.MenuCategory" />
-          <EntitySet Name="MenuItems" EntityType="OnlineMenuModel.MenuItem" />
-          <EntitySet Name="MenuSubCategories" EntityType="OnlineMenuModel.MenuSubCategory" />
+          <EntitySet Name="Items" EntityType="OnlineMenuModel.Item" />
           <EntitySet Name="Orders" EntityType="OnlineMenuModel.Order" />
           <EntitySet Name="OrderItems" EntityType="OnlineMenuModel.OrderItem" />
           <EntitySet Name="Restaurants" EntityType="OnlineMenuModel.Restaurant" />
           <EntitySet Name="Settings" EntityType="OnlineMenuModel.Setting" />
+          <EntitySet Name="SubCategories" EntityType="OnlineMenuModel.SubCategory" />
+          <EntitySet Name="SubCategoryVsItems" EntityType="OnlineMenuModel.SubCategoryVsItem" />
           <EntitySet Name="Subscriptions" EntityType="OnlineMenuModel.Subscription" />
           <EntitySet Name="sysdiagrams" EntityType="OnlineMenuModel.sysdiagram" />
           <EntitySet Name="Tables" EntityType="OnlineMenuModel.Table" />
           <EntitySet Name="Users" EntityType="OnlineMenuModel.User" />
           <EntitySet Name="UserTypes" EntityType="OnlineMenuModel.UserType" />
+          <EntitySet Name="UserVsRestaurants" EntityType="OnlineMenuModel.UserVsRestaurant" />
           <EntitySet Name="ViewRestaurants" EntityType="OnlineMenuModel.ViewRestaurant" />
+          <AssociationSet Name="FK_CategoryVsItem_MenuCategory" Association="OnlineMenuModel.FK_CategoryVsItem_MenuCategory">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryVsItem" EntitySet="CategoryVsItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuCategory_Restaurant" Association="OnlineMenuModel.FK_MenuCategory_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategory_Category" Association="OnlineMenuModel.FK_SubCategory_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="SubCategory" EntitySet="SubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryVsItem_MenuItem" Association="OnlineMenuModel.FK_CategoryVsItem_MenuItem">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="CategoryVsItem" EntitySet="CategoryVsItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_Restaurant_Country" Association="OnlineMenuModel.FK_Restaurant_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="Restaurant" EntitySet="Restaurants" />
           </AssociationSet>
-          <AssociationSet Name="FK_MenuCategory_Restaurant" Association="OnlineMenuModel.FK_MenuCategory_Restaurant">
-            <End Role="Restaurant" EntitySet="Restaurants" />
-            <End Role="MenuCategory" EntitySet="MenuCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuItem_MenuCategory" Association="OnlineMenuModel.FK_MenuItem_MenuCategory">
-            <End Role="MenuCategory" EntitySet="MenuCategories" />
-            <End Role="MenuItem" EntitySet="MenuItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuSubCategory_MenuSubCategory" Association="OnlineMenuModel.FK_MenuSubCategory_MenuSubCategory">
-            <End Role="MenuCategory" EntitySet="MenuCategories" />
-            <End Role="MenuSubCategory" EntitySet="MenuSubCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuItem_MenuSubCategory" Association="OnlineMenuModel.FK_MenuItem_MenuSubCategory">
-            <End Role="MenuSubCategory" EntitySet="MenuSubCategories" />
-            <End Role="MenuItem" EntitySet="MenuItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderItems_MenuItem" Association="OnlineMenuModel.FK_OrderItems_MenuItem">
-            <End Role="MenuItem" EntitySet="MenuItems" />
+          <AssociationSet Name="FK_OrderItems_Item" Association="OnlineMenuModel.FK_OrderItems_Item">
+            <End Role="Item" EntitySet="Items" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderItems_Order" Association="OnlineMenuModel.FK_OrderItems_Order">
+          <AssociationSet Name="FK_SubCategoryVsItem_Item1" Association="OnlineMenuModel.FK_SubCategoryVsItem_Item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="SubCategoryVsItem" EntitySet="SubCategoryVsItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_Order1" Association="OnlineMenuModel.FK_OrderItems_Order1">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
@@ -474,22 +570,24 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <End Role="Restaurant" EntitySet="Restaurants" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserVsRestaurant_Restaurant" Association="OnlineMenuModel.FK_UserVsRestaurant_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="UserVsRestaurant" EntitySet="UserVsRestaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoryVsItem_SubCategory" Association="OnlineMenuModel.FK_SubCategoryVsItem_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategories" />
+            <End Role="SubCategoryVsItem" EntitySet="SubCategoryVsItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="OnlineMenuModel.FK_User_UserType">
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserVsRestaurant_User" Association="OnlineMenuModel.FK_UserVsRestaurant_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserVsRestaurant" EntitySet="UserVsRestaurants" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CurrencySymbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GovernmentTax" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <NavigationProperty Name="Restaurants" Relationship="OnlineMenuModel.FK_Restaurant_Country" FromRole="Country" ToRole="Restaurant" />
-        </EntityType>
-        <EntityType Name="MenuCategory">
+        <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -500,17 +598,35 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BackgroundImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Sequence" Type="Int32" />
-          <NavigationProperty Name="Restaurant" Relationship="OnlineMenuModel.FK_MenuCategory_Restaurant" FromRole="MenuCategory" ToRole="Restaurant" />
-          <NavigationProperty Name="MenuItems" Relationship="OnlineMenuModel.FK_MenuItem_MenuCategory" FromRole="MenuCategory" ToRole="MenuItem" />
-          <NavigationProperty Name="MenuSubCategories" Relationship="OnlineMenuModel.FK_MenuSubCategory_MenuSubCategory" FromRole="MenuCategory" ToRole="MenuSubCategory" />
+          <NavigationProperty Name="CategoryVsItems" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuCategory" FromRole="Category" ToRole="CategoryVsItem" />
+          <NavigationProperty Name="Restaurant" Relationship="OnlineMenuModel.FK_MenuCategory_Restaurant" FromRole="Category" ToRole="Restaurant" />
+          <NavigationProperty Name="SubCategories" Relationship="OnlineMenuModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
         </EntityType>
-        <EntityType Name="MenuItem">
+        <EntityType Name="CategoryVsItem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="MenuCategoryId" Type="Guid" Nullable="false" />
-          <Property Name="MenuSubCategoryId" Type="Guid" Nullable="false" />
+          <Property Name="MenuItemId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuCategory" FromRole="CategoryVsItem" ToRole="Category" />
+          <NavigationProperty Name="Item" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuItem" FromRole="CategoryVsItem" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencySymbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GovernmentTax" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Restaurants" Relationship="OnlineMenuModel.FK_Restaurant_Country" FromRole="Country" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Vegan" Type="Boolean" />
@@ -522,22 +638,9 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sequence" Type="Int32" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MenuCategory" Relationship="OnlineMenuModel.FK_MenuItem_MenuCategory" FromRole="MenuItem" ToRole="MenuCategory" />
-          <NavigationProperty Name="MenuSubCategory" Relationship="OnlineMenuModel.FK_MenuItem_MenuSubCategory" FromRole="MenuItem" ToRole="MenuSubCategory" />
-          <NavigationProperty Name="OrderItems" Relationship="OnlineMenuModel.FK_OrderItems_MenuItem" FromRole="MenuItem" ToRole="OrderItem" />
-        </EntityType>
-        <EntityType Name="MenuSubCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="MenuCategoryId" Type="Guid" Nullable="false" />
-          <Property Name="Tittle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Subtitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Sequency" Type="Int32" />
-          <NavigationProperty Name="MenuCategory" Relationship="OnlineMenuModel.FK_MenuSubCategory_MenuSubCategory" FromRole="MenuSubCategory" ToRole="MenuCategory" />
-          <NavigationProperty Name="MenuItems" Relationship="OnlineMenuModel.FK_MenuItem_MenuSubCategory" FromRole="MenuSubCategory" ToRole="MenuItem" />
+          <NavigationProperty Name="CategoryVsItems" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuItem" FromRole="Item" ToRole="CategoryVsItem" />
+          <NavigationProperty Name="OrderItems" Relationship="OnlineMenuModel.FK_OrderItems_Item" FromRole="Item" ToRole="OrderItem" />
+          <NavigationProperty Name="SubCategoryVsItems" Relationship="OnlineMenuModel.FK_SubCategoryVsItem_Item1" FromRole="Item" ToRole="SubCategoryVsItem" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -549,7 +652,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="OrderItem" Relationship="OnlineMenuModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItem" />
+          <NavigationProperty Name="OrderItems" Relationship="OnlineMenuModel.FK_OrderItems_Order1" FromRole="Order" ToRole="OrderItem" />
           <NavigationProperty Name="Table" Relationship="OnlineMenuModel.FK_Orders_Table" FromRole="Order" ToRole="Table" />
           <NavigationProperty Name="User" Relationship="OnlineMenuModel.FK_Orders_User" FromRole="Order" ToRole="User" />
         </EntityType>
@@ -559,11 +662,11 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="OrderId" Type="Guid" Nullable="false" />
-          <Property Name="MenuItemId" Type="Guid" Nullable="false" />
+          <Property Name="ItemId" Type="Guid" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MenuItem" Relationship="OnlineMenuModel.FK_OrderItems_MenuItem" FromRole="OrderItem" ToRole="MenuItem" />
-          <NavigationProperty Name="Order" Relationship="OnlineMenuModel.FK_OrderItems_Order" FromRole="OrderItem" ToRole="Order" />
+          <NavigationProperty Name="Item" Relationship="OnlineMenuModel.FK_OrderItems_Item" FromRole="OrderItem" ToRole="Item" />
+          <NavigationProperty Name="Order" Relationship="OnlineMenuModel.FK_OrderItems_Order1" FromRole="OrderItem" ToRole="Order" />
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
@@ -579,11 +682,12 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LogoFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IskitchenOpen" Type="Boolean" />
+          <NavigationProperty Name="Categories" Relationship="OnlineMenuModel.FK_MenuCategory_Restaurant" FromRole="Restaurant" ToRole="Category" />
           <NavigationProperty Name="Country" Relationship="OnlineMenuModel.FK_Restaurant_Country" FromRole="Restaurant" ToRole="Country" />
-          <NavigationProperty Name="MenuCategories" Relationship="OnlineMenuModel.FK_MenuCategory_Restaurant" FromRole="Restaurant" ToRole="MenuCategory" />
           <NavigationProperty Name="Subscriptions" Relationship="OnlineMenuModel.FK_Subscription_Restaurant" FromRole="Restaurant" ToRole="Subscription" />
           <NavigationProperty Name="Tables" Relationship="OnlineMenuModel.FK_Table_Restaurant" FromRole="Restaurant" ToRole="Table" />
           <NavigationProperty Name="Users" Relationship="OnlineMenuModel.FK_User_Restaurant" FromRole="Restaurant" ToRole="User" />
+          <NavigationProperty Name="UserVsRestaurants" Relationship="OnlineMenuModel.FK_UserVsRestaurant_Restaurant" FromRole="Restaurant" ToRole="UserVsRestaurant" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -591,6 +695,29 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="LogosFilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CategoryId" Type="Guid" Nullable="false" />
+          <Property Name="Tittle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sequency" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="OnlineMenuModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+          <NavigationProperty Name="SubCategoryVsItems" Relationship="OnlineMenuModel.FK_SubCategoryVsItem_SubCategory" FromRole="SubCategory" ToRole="SubCategoryVsItem" />
+        </EntityType>
+        <EntityType Name="SubCategoryVsItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SubCategoryId" Type="Guid" Nullable="false" />
+          <Property Name="ItemId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="OnlineMenuModel.FK_SubCategoryVsItem_Item1" FromRole="SubCategoryVsItem" ToRole="Item" />
+          <NavigationProperty Name="SubCategory" Relationship="OnlineMenuModel.FK_SubCategoryVsItem_SubCategory" FromRole="SubCategoryVsItem" ToRole="SubCategory" />
         </EntityType>
         <EntityType Name="Subscription">
           <Key>
@@ -636,6 +763,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <NavigationProperty Name="Orders" Relationship="OnlineMenuModel.FK_Orders_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Restaurant" Relationship="OnlineMenuModel.FK_User_Restaurant" FromRole="User" ToRole="Restaurant" />
           <NavigationProperty Name="UserType" Relationship="OnlineMenuModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="UserVsRestaurants" Relationship="OnlineMenuModel.FK_UserVsRestaurant_User" FromRole="User" ToRole="UserVsRestaurant" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -644,6 +772,16 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="OnlineMenuModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserVsRestaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="RestaurantId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="OnlineMenuModel.FK_UserVsRestaurant_Restaurant" FromRole="UserVsRestaurant" ToRole="Restaurant" />
+          <NavigationProperty Name="User" Relationship="OnlineMenuModel.FK_UserVsRestaurant_User" FromRole="UserVsRestaurant" ToRole="User" />
         </EntityType>
         <EntityType Name="ViewRestaurant">
           <Key>
@@ -666,6 +804,54 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="MenuCategories" Type="Int32" />
           <Property Name="Users" Type="Int32" />
         </EntityType>
+        <Association Name="FK_CategoryVsItem_MenuCategory">
+          <End Type="OnlineMenuModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="OnlineMenuModel.CategoryVsItem" Role="CategoryVsItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryVsItem">
+              <PropertyRef Name="MenuCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuCategory_Restaurant">
+          <End Type="OnlineMenuModel.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="OnlineMenuModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategory_Category">
+          <End Type="OnlineMenuModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="OnlineMenuModel.SubCategory" Role="SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryVsItem_MenuItem">
+          <End Type="OnlineMenuModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="OnlineMenuModel.CategoryVsItem" Role="CategoryVsItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryVsItem">
+              <PropertyRef Name="MenuItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Restaurant_Country">
           <End Type="OnlineMenuModel.Country" Role="Country" Multiplicity="1" />
           <End Type="OnlineMenuModel.Restaurant" Role="Restaurant" Multiplicity="*" />
@@ -678,75 +864,39 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MenuCategory_Restaurant">
-          <End Type="OnlineMenuModel.Restaurant" Role="Restaurant" Multiplicity="1" />
-          <End Type="OnlineMenuModel.MenuCategory" Role="MenuCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Restaurant">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuCategory">
-              <PropertyRef Name="RestaurantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuItem_MenuCategory">
-          <End Type="OnlineMenuModel.MenuCategory" Role="MenuCategory" Multiplicity="1" />
-          <End Type="OnlineMenuModel.MenuItem" Role="MenuItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuItem">
-              <PropertyRef Name="MenuCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuSubCategory_MenuSubCategory">
-          <End Type="OnlineMenuModel.MenuCategory" Role="MenuCategory" Multiplicity="1" />
-          <End Type="OnlineMenuModel.MenuSubCategory" Role="MenuSubCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuSubCategory">
-              <PropertyRef Name="MenuCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuItem_MenuSubCategory">
-          <End Type="OnlineMenuModel.MenuSubCategory" Role="MenuSubCategory" Multiplicity="1" />
-          <End Type="OnlineMenuModel.MenuItem" Role="MenuItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuSubCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuItem">
-              <PropertyRef Name="MenuSubCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderItems_MenuItem">
-          <End Type="OnlineMenuModel.MenuItem" Role="MenuItem" Multiplicity="1" />
+        <Association Name="FK_OrderItems_Item">
+          <End Type="OnlineMenuModel.Item" Role="Item" Multiplicity="1" />
           <End Type="OnlineMenuModel.OrderItem" Role="OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MenuItem">
+            <Principal Role="Item">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="OrderItem">
-              <PropertyRef Name="MenuItemId" />
+              <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItems_Order">
+        <Association Name="FK_SubCategoryVsItem_Item1">
+          <End Type="OnlineMenuModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="OnlineMenuModel.SubCategoryVsItem" Role="SubCategoryVsItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategoryVsItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Order1">
           <End Type="OnlineMenuModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="OnlineMenuModel.OrderItem" Role="OrderItem" Multiplicity="0..1" />
+          <End Type="OnlineMenuModel.OrderItem" Role="OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="OrderItem">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -810,6 +960,30 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserVsRestaurant_Restaurant">
+          <End Type="OnlineMenuModel.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="OnlineMenuModel.UserVsRestaurant" Role="UserVsRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserVsRestaurant">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoryVsItem_SubCategory">
+          <End Type="OnlineMenuModel.SubCategory" Role="SubCategory" Multiplicity="1" />
+          <End Type="OnlineMenuModel.SubCategoryVsItem" Role="SubCategoryVsItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategoryVsItem">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserType">
           <End Type="OnlineMenuModel.UserType" Role="UserType" Multiplicity="1" />
           <End Type="OnlineMenuModel.User" Role="User" Multiplicity="*" />
@@ -822,25 +996,27 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserVsRestaurant_User">
+          <End Type="OnlineMenuModel.User" Role="User" Multiplicity="1" />
+          <End Type="OnlineMenuModel.UserVsRestaurant" Role="UserVsRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserVsRestaurant">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OnlineMenuModelStoreContainer" CdmEntityContainer="OnlineMenuEntities">
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="OnlineMenuModel.Country">
-              <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="GovernmentTax" ColumnName="GovernmentTax" />
-                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
-                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MenuCategories">
-            <EntityTypeMapping TypeName="OnlineMenuModel.MenuCategory">
-              <MappingFragment StoreEntitySet="MenuCategory">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="OnlineMenuModel.Category">
+              <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="BackgroundImage" ColumnName="BackgroundImage" />
                 <ScalarProperty Name="Footer" ColumnName="Footer" />
@@ -851,9 +1027,28 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MenuItems">
-            <EntityTypeMapping TypeName="OnlineMenuModel.MenuItem">
-              <MappingFragment StoreEntitySet="MenuItem">
+          <EntitySetMapping Name="CategoryVsItems">
+            <EntityTypeMapping TypeName="OnlineMenuModel.CategoryVsItem">
+              <MappingFragment StoreEntitySet="CategoryVsItem">
+                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+                <ScalarProperty Name="MenuCategoryId" ColumnName="MenuCategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="OnlineMenuModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="GovernmentTax" ColumnName="GovernmentTax" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="OnlineMenuModel.Item">
+              <MappingFragment StoreEntitySet="Item">
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -865,20 +1060,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
                 <ScalarProperty Name="Vegan" ColumnName="Vegan" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MenuSubCategoryId" ColumnName="MenuSubCategoryId" />
-                <ScalarProperty Name="MenuCategoryId" ColumnName="MenuCategoryId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MenuSubCategories">
-            <EntityTypeMapping TypeName="OnlineMenuModel.MenuSubCategory">
-              <MappingFragment StoreEntitySet="MenuSubCategory">
-                <ScalarProperty Name="Sequency" ColumnName="Sequency" />
-                <ScalarProperty Name="Footer" ColumnName="Footer" />
-                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
-                <ScalarProperty Name="Tittle" ColumnName="Tittle" />
-                <ScalarProperty Name="MenuCategoryId" ColumnName="MenuCategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -900,7 +1081,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
               <MappingFragment StoreEntitySet="OrderItems">
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -926,6 +1107,27 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <EntityTypeMapping TypeName="OnlineMenuModel.Setting">
               <MappingFragment StoreEntitySet="Settings">
                 <ScalarProperty Name="LogosFilePath" ColumnName="LogosFilePath" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategories">
+            <EntityTypeMapping TypeName="OnlineMenuModel.SubCategory">
+              <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="Sequency" ColumnName="Sequency" />
+                <ScalarProperty Name="Footer" ColumnName="Footer" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+                <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategoryVsItems">
+            <EntityTypeMapping TypeName="OnlineMenuModel.SubCategoryVsItem">
+              <MappingFragment StoreEntitySet="SubCategoryVsItem">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -977,6 +1179,15 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <EntityTypeMapping TypeName="OnlineMenuModel.UserType">
               <MappingFragment StoreEntitySet="UserType">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserVsRestaurants">
+            <EntityTypeMapping TypeName="OnlineMenuModel.UserVsRestaurant">
+              <MappingFragment StoreEntitySet="UserVsRestaurant">
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

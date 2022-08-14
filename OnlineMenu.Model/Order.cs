@@ -14,6 +14,12 @@ namespace OnlineMenu.Model
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.OrderItems = new HashSet<OrderItem>();
+        }
+    
         public System.Guid Id { get; set; }
         public System.Guid UserId { get; set; }
         public System.Guid TableId { get; set; }
@@ -21,7 +27,8 @@ namespace OnlineMenu.Model
         public string Status { get; set; }
         public Nullable<System.DateTime> DateTime { get; set; }
     
-        public virtual OrderItem OrderItem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual Table Table { get; set; }
         public virtual User User { get; set; }
     }
