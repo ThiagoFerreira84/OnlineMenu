@@ -43,7 +43,7 @@
           <Property Name="PriceBig" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="Photo" Type="image" />
-          <Property Name="Sequency" Type="int" />
+          <Property Name="Sequence" Type="int" />
         </EntityType>
         <EntityType Name="MenuSubCategory">
           <Key>
@@ -521,7 +521,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="PriceBig" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Sequency" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
           <NavigationProperty Name="MenuCategory" Relationship="OnlineMenuModel.FK_MenuItem_MenuCategory" FromRole="MenuItem" ToRole="MenuCategory" />
           <NavigationProperty Name="MenuSubCategory" Relationship="OnlineMenuModel.FK_MenuItem_MenuSubCategory" FromRole="MenuItem" ToRole="MenuSubCategory" />
           <NavigationProperty Name="OrderItems" Relationship="OnlineMenuModel.FK_OrderItems_MenuItem" FromRole="MenuItem" ToRole="OrderItem" />
@@ -854,7 +854,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <EntitySetMapping Name="MenuItems">
             <EntityTypeMapping TypeName="OnlineMenuModel.MenuItem">
               <MappingFragment StoreEntitySet="MenuItem">
-                <ScalarProperty Name="Sequency" ColumnName="Sequency" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PriceBig" ColumnName="PriceBig" />

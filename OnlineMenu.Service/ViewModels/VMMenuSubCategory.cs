@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace OnlineMenu.Service.ViewModels
         public string Tittle { get; set; }
         public string Subtitle { get; set; }
         public string Footer { get; set; }
+
+        [Required]
         public Nullable<int> Sequency { get; set; }
 
         public virtual VMMenuCategory MenuCategory { get; set; }

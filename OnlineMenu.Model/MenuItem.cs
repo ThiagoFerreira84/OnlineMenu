@@ -33,7 +33,7 @@ namespace OnlineMenu.Model
         public Nullable<decimal> PriceBig { get; set; }
         public string Type { get; set; }
         public byte[] Photo { get; set; }
-        public Nullable<int> Sequency { get; set; }
+        public Nullable<int> Sequence { get; set; }
     
         public virtual MenuCategory MenuCategory { get; set; }
         public virtual MenuSubCategory MenuSubCategory { get; set; }

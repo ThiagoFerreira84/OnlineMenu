@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\MenuItemsController.cs" />
     <Compile Include="Controllers\MenuCategoriesController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
@@ -209,6 +210,7 @@
     <Content Include="Views\Tables\AddOrRemove.cshtml" />
     <Content Include="Views\MenuCategories\Index.cshtml" />
     <Content Include="Views\MenuCategories\Create.cshtml" />
+    <Content Include="Views\MenuCategories\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

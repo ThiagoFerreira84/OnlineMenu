@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace OnlineMenu.Service.ViewModels
         public string Subtitle { get; set; }
         public string Footer { get; set; }
         public byte[] BackgroundImage { get; set; }
+
+        [Required]
         public Nullable<int> Sequence { get; set; }
 
         public virtual VMRestaurant Restaurant { get; set; }

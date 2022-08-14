@@ -27,6 +27,8 @@
             @Html.DisplayNameFor(model => model.Sequence)
         </th>
         <th></th>
+        <th></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -45,10 +47,24 @@
                 @Html.DisplayFor(modelItem => item.Sequence)
             </td>
             <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "MenuSubCategory", new {menuCategoryId = item.Id})';return false;">
+                    <span class="fa fa-plus-circle"></span> Sub-Categories
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "MenuItems", new {menuCategoryId = item.Id})';return false;">
+                    <span class="fa fa-plus-circle"></span> Items
+                </button>
+            </td>
+            <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 </table>
+
+<br />
+<div>
+    @Html.ActionLink("Return", "Index", "Restaurants")
+</div>

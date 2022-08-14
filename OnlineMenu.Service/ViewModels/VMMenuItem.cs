@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,9 @@ namespace OnlineMenu.Service.ViewModels
         public Nullable<decimal> PriceBig { get; set; }
         public string Type { get; set; }
         public byte[] Photo { get; set; }
-        public Nullable<int> Sequency { get; set; }
+
+        [Required]
+        public Nullable<int> Sequence { get; set; }
 
         public virtual VMMenuCategory MenuCategory { get; set; }
         public virtual VMMenuSubCategory MenuSubCategory { get; set; }
