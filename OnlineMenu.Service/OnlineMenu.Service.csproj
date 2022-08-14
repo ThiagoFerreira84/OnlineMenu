@@ -138,7 +138,6 @@
     <Compile Include="Services\TableService.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\RestaurantService.cs" />
-    <Compile Include="ViewModels\VMMenu.cs" />
     <Compile Include="ViewModels\VMViewRestaurant.cs" />
     <Compile Include="ViewModels\VMCountry.cs" />
     <Compile Include="ViewModels\VMMenuCategory.cs" />

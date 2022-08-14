@@ -21,6 +21,7 @@ namespace OnlineMenu.Service.DI
             container.RegisterType<IRestaurantService, RestaurantService>(new ContainerControlledLifetimeManager());
             container.RegisterType<ITableService, TableService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IMenuCategoryService, MenuCategoryService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IMenuItemsService, MenuItemsService>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IUnitOfWork, UnitOfWork>(new ContainerControlledLifetimeManager());
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

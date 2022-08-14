@@ -8,41 +8,39 @@ using System.Web.Mvc;
 
 namespace OnlineMenu.Controllers
 {
-    public class MenuItemsController : Controller
+    public class MenuItemsCategoryController : Controller
     {
         private IMenuItemsService MenuItemsService;
         private IRestaurantService restaurantService;
 
-        public MenuItemsController(IMenuItemsService MenuItemsService, IRestaurantService restaurantService)
+        public MenuItemsCategoryController(IMenuItemsService MenuItemsService, IRestaurantService restaurantService)
         {
             this.MenuItemsService = MenuItemsService;
             this.restaurantService = restaurantService;
         }
 
-        public ActionResult Index(Guid restaurantId)
+        public ActionResult Index(Guid menuCategoryId)
         {
-            var categories = MenuItemsService.GetByCategoryId(restaurantId);
-
-            ViewBag.RestaurantId = restaurantId;
-            ViewBag.RestaurantName = restaurantService.GetById(restaurantId).Name;
+            var categories = MenuItemsService.GetByCategoryId(menuCategoryId);
+            ViewBag.CategoryId = menuCategoryId;
             return View(categories);
         }
 
-        public ActionResult Create(Guid restaurantId)
+        public ActionResult Create(Guid menuCategoryId)
         {
-            var MenuItems = new VMMenuItems()
+            var MenuItems = new VMMenuItem()
             {
-                RestaurantId = restaurantId,
+                MenuCategoryId = menuCategoryId,
             };
 
             return View(MenuItems);
         }
 
         [HttpPost]
-        public ActionResult Create(VMMenuItems vmEntity)
+        public ActionResult Create(VMMenuItem vmEntity)
         {
             MenuItemsService.Create(vmEntity);
-            return RedirectToAction("Index", new { restaurantId = vmEntity.RestaurantId });
+            return RedirectToAction("Index", new { menuCategoryId = vmEntity.MenuCategoryId });
         }
 
         public ActionResult Edit(Guid id)
@@ -51,10 +49,10 @@ namespace OnlineMenu.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(VMMenuItems vmEntity)
+        public ActionResult Edit(VMMenuItem vmEntity)
         {
             MenuItemsService.Update(vmEntity);
-            return RedirectToAction("Index", new { restaurantId = vmEntity.RestaurantId });
+            return RedirectToAction("Index", new { menuCategoryId = vmEntity.MenuCategoryId });
         }
     }
 }
