@@ -30,8 +30,7 @@ namespace OnlineMenu.Controllers
 
         public ActionResult Create(Guid categoryId)
         {
-            var itemWithMaxSequence = itemsService.GetByCategoryId(categoryId).Max(x => x.Sequence);
-            var nextSequence = itemWithMaxSequence == null ? 1 : itemWithMaxSequence + 1;
+            var nextSequence = itemsService.GetByCategoryId(categoryId).Max(x => x.Sequence) + 1;
 
             var Items = new VMItem()
             {

@@ -1,4 +1,5 @@
-﻿using OnlineMenu.Model;
+﻿using Microsoft.Practices.ObjectBuilder2;
+using OnlineMenu.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -37,6 +38,8 @@ namespace OnlineMenu.Service.ViewModels
         public string Type { get; set; }
 
         public string Photo { get; set; }
+
+        public int Sequence { get; set; }
 
         public virtual ICollection<VMCategoryVsItem> CategoryVsItems { get; set; }
         public virtual ICollection<VMOrderItem> OrderItems { get; set; }

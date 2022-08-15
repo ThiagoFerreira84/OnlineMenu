@@ -39,7 +39,6 @@ namespace OnlineMenu.Service.Services
         {
             var entity = Mapper.Map<Item>(vmEntity);
             entity.Id = Guid.NewGuid();
-
             unitOfWork.Item.Add(entity);
             return unitOfWork.SaveChanges();
         }
@@ -58,13 +57,14 @@ namespace OnlineMenu.Service.Services
 
         public List<VMItem> GetByCategoryId(Guid id)
         {
-            var entities = unitOfWork.Item.Find(t => t.CategoryId == id).OrderBy(t => t.Sequence).ToList();
+            var entities = unitOfWork.CategoryVsItem.Find(t => t.CategoryId == id).OrderBy(t => t.Sequence).Select(t => t.Item).ToList();
             return Mapper.Map<List<VMItem>>(entities);
         }
 
         public List<VMItem> GetBySubCategoryId(Guid id)
         {
-            var entities = unitOfWork.Item.Find(t => t.SubCategoryId == id).OrderBy(t => t.Sequence).ToList();
+            var entities = unitOfWork.SubCategoryVsItem.Find(t => t.SubCategoryId == id).OrderBy(t => t.Sequence).Select(t => t.Item).ToList();
+
             return Mapper.Map<List<VMItem>>(entities);
         }
 

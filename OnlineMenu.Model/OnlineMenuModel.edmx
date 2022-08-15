@@ -22,8 +22,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MenuCategoryId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MenuItemId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
@@ -198,7 +198,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CategoryVsItem">
-              <PropertyRef Name="MenuCategoryId" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -210,7 +210,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CategoryVsItem">
-              <PropertyRef Name="MenuItemId" />
+              <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -587,8 +587,8 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="MenuCategoryId" Type="Guid" Nullable="false" />
-          <Property Name="MenuItemId" Type="Guid" Nullable="false" />
+          <Property Name="CategoryId" Type="Guid" Nullable="false" />
+          <Property Name="ItemId" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuCategory" FromRole="CategoryVsItem" ToRole="Category" />
           <NavigationProperty Name="Item" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuItem" FromRole="CategoryVsItem" ToRole="Item" />
@@ -790,7 +790,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CategoryVsItem">
-              <PropertyRef Name="MenuCategoryId" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -826,7 +826,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CategoryVsItem">
-              <PropertyRef Name="MenuItemId" />
+              <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -997,8 +997,8 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <EntityTypeMapping TypeName="OnlineMenuModel.CategoryVsItem">
               <MappingFragment StoreEntitySet="CategoryVsItem">
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
-                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
-                <ScalarProperty Name="MenuCategoryId" ColumnName="MenuCategoryId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
