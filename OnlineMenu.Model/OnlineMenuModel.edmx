@@ -24,6 +24,7 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MenuCategoryId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MenuItemId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sequence" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -48,7 +49,6 @@
           <Property Name="PriceSmall" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PriceBig" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sequence" Type="int" />
           <Property Name="Photo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Order">
@@ -103,7 +103,7 @@
           <Property Name="Tittle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Subtitle" Type="nvarchar(max)" />
           <Property Name="Footer" Type="nvarchar(max)" />
-          <Property Name="Sequency" Type="int" />
+          <Property Name="Sequence" Type="int" />
         </EntityType>
         <EntityType Name="SubCategoryVsItem">
           <Key>
@@ -112,6 +112,7 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SubCategoryId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ItemId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sequence" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Subscription">
           <Key>
@@ -147,7 +148,6 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserTypeId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="RestaurantId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
@@ -346,18 +346,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Restaurant">
-          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Restaurant">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RestaurantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_UserType">
           <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -479,10 +467,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <End Role="Restaurant" EntitySet="Restaurant" />
             <End Role="Table" EntitySet="Table" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Restaurant" Association="Self.FK_User_Restaurant">
-            <End Role="Restaurant" EntitySet="Restaurant" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
@@ -566,10 +550,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <End Role="Restaurant" EntitySet="Restaurants" />
             <End Role="Table" EntitySet="Tables" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Restaurant" Association="OnlineMenuModel.FK_User_Restaurant">
-            <End Role="Restaurant" EntitySet="Restaurants" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserVsRestaurant_Restaurant" Association="OnlineMenuModel.FK_UserVsRestaurant_Restaurant">
             <End Role="Restaurant" EntitySet="Restaurants" />
             <End Role="UserVsRestaurant" EntitySet="UserVsRestaurants" />
@@ -609,6 +589,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="MenuCategoryId" Type="Guid" Nullable="false" />
           <Property Name="MenuItemId" Type="Guid" Nullable="false" />
+          <Property Name="Sequence" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuCategory" FromRole="CategoryVsItem" ToRole="Category" />
           <NavigationProperty Name="Item" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuItem" FromRole="CategoryVsItem" ToRole="Item" />
         </EntityType>
@@ -636,7 +617,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="PriceSmall" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="PriceBig" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sequence" Type="Int32" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CategoryVsItems" Relationship="OnlineMenuModel.FK_CategoryVsItem_MenuItem" FromRole="Item" ToRole="CategoryVsItem" />
           <NavigationProperty Name="OrderItems" Relationship="OnlineMenuModel.FK_OrderItems_Item" FromRole="Item" ToRole="OrderItem" />
@@ -686,7 +666,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <NavigationProperty Name="Country" Relationship="OnlineMenuModel.FK_Restaurant_Country" FromRole="Restaurant" ToRole="Country" />
           <NavigationProperty Name="Subscriptions" Relationship="OnlineMenuModel.FK_Subscription_Restaurant" FromRole="Restaurant" ToRole="Subscription" />
           <NavigationProperty Name="Tables" Relationship="OnlineMenuModel.FK_Table_Restaurant" FromRole="Restaurant" ToRole="Table" />
-          <NavigationProperty Name="Users" Relationship="OnlineMenuModel.FK_User_Restaurant" FromRole="Restaurant" ToRole="User" />
           <NavigationProperty Name="UserVsRestaurants" Relationship="OnlineMenuModel.FK_UserVsRestaurant_Restaurant" FromRole="Restaurant" ToRole="UserVsRestaurant" />
         </EntityType>
         <EntityType Name="Setting">
@@ -705,7 +684,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="Tittle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Subtitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Sequency" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="OnlineMenuModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
           <NavigationProperty Name="SubCategoryVsItems" Relationship="OnlineMenuModel.FK_SubCategoryVsItem_SubCategory" FromRole="SubCategory" ToRole="SubCategoryVsItem" />
         </EntityType>
@@ -716,6 +695,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="SubCategoryId" Type="Guid" Nullable="false" />
           <Property Name="ItemId" Type="Guid" Nullable="false" />
+          <Property Name="Sequence" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Item" Relationship="OnlineMenuModel.FK_SubCategoryVsItem_Item1" FromRole="SubCategoryVsItem" ToRole="Item" />
           <NavigationProperty Name="SubCategory" Relationship="OnlineMenuModel.FK_SubCategoryVsItem_SubCategory" FromRole="SubCategoryVsItem" ToRole="SubCategory" />
         </EntityType>
@@ -756,12 +736,10 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="UserTypeId" Type="Guid" Nullable="false" />
-          <Property Name="RestaurantId" Type="Guid" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="OnlineMenuModel.FK_Orders_User" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Restaurant" Relationship="OnlineMenuModel.FK_User_Restaurant" FromRole="User" ToRole="Restaurant" />
           <NavigationProperty Name="UserType" Relationship="OnlineMenuModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
           <NavigationProperty Name="UserVsRestaurants" Relationship="OnlineMenuModel.FK_UserVsRestaurant_User" FromRole="User" ToRole="UserVsRestaurant" />
         </EntityType>
@@ -948,18 +926,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Restaurant">
-          <End Type="OnlineMenuModel.Restaurant" Role="Restaurant" Multiplicity="1" />
-          <End Type="OnlineMenuModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Restaurant">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RestaurantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserVsRestaurant_Restaurant">
           <End Type="OnlineMenuModel.Restaurant" Role="Restaurant" Multiplicity="1" />
           <End Type="OnlineMenuModel.UserVsRestaurant" Role="UserVsRestaurant" Multiplicity="*" />
@@ -1030,6 +996,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <EntitySetMapping Name="CategoryVsItems">
             <EntityTypeMapping TypeName="OnlineMenuModel.CategoryVsItem">
               <MappingFragment StoreEntitySet="CategoryVsItem">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
                 <ScalarProperty Name="MenuCategoryId" ColumnName="MenuCategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1050,7 +1017,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
             <EntityTypeMapping TypeName="OnlineMenuModel.Item">
               <MappingFragment StoreEntitySet="Item">
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PriceBig" ColumnName="PriceBig" />
                 <ScalarProperty Name="PriceSmall" ColumnName="PriceSmall" />
@@ -1114,7 +1080,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <EntitySetMapping Name="SubCategories">
             <EntityTypeMapping TypeName="OnlineMenuModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
-                <ScalarProperty Name="Sequency" ColumnName="Sequency" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="Footer" ColumnName="Footer" />
                 <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
                 <ScalarProperty Name="Tittle" ColumnName="Tittle" />
@@ -1126,6 +1092,7 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
           <EntitySetMapping Name="SubCategoryVsItems">
             <EntityTypeMapping TypeName="OnlineMenuModel.SubCategoryVsItem">
               <MappingFragment StoreEntitySet="SubCategoryVsItem">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1169,7 +1136,6 @@ warning 6002: The table/view 'OnlineMenu.dbo.ViewRestaurants' does not have a pr
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

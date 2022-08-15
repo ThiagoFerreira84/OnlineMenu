@@ -1,4 +1,4 @@
-﻿@model OnlineMenu.Service.ViewModels.VMMenuItem
+﻿@model OnlineMenu.Service.ViewModels.VMItem
 
 @{
     ViewBag.Title = "Create";
@@ -10,8 +10,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.MenuCategoryId)
-    @Html.HiddenFor(model => model.MenuSubCategoryId)
+    @Html.HiddenFor(model => model.CategoryId)
+    @Html.HiddenFor(model => model.SubCategoryId)
 
     <div class="form-horizontal">
         <hr />

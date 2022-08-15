@@ -20,7 +20,6 @@ namespace OnlineMenu.Model
             this.Categories = new HashSet<Category>();
             this.Subscriptions = new HashSet<Subscription>();
             this.Tables = new HashSet<Table>();
-            this.Users = new HashSet<User>();
             this.UserVsRestaurants = new HashSet<UserVsRestaurant>();
         }
     
@@ -42,8 +41,6 @@ namespace OnlineMenu.Model
         public virtual ICollection<Subscription> Subscriptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Table> Tables { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserVsRestaurant> UserVsRestaurants { get; set; }
     }

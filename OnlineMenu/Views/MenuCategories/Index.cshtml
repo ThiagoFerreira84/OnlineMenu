@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMMenuCategory>
+﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMCategory>
 
 @{
     ViewBag.Title = "Index";
@@ -47,12 +47,12 @@
                 @Html.DisplayFor(modelItem => item.Sequence)
             </td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("IndexForSubCategory", "MenuSubCategory", new {menuCategoryId = item.Id})';return false;">
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("IndexForSubCategory", "SubCategory", new {categoryId = item.Id})';return false;">
                     <span class="fa fa-plus-circle"></span> Sub-Categories
                 </button>
             </td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "MenuItemsCategory", new {menuCategoryId = item.Id})';return false;">
+                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "ItemsCategory", new {categoryId = item.Id})';return false;">
                     <span class="fa fa-plus-circle"></span> Items
                 </button>
             </td>

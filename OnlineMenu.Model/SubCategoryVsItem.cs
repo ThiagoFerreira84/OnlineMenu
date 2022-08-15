@@ -17,6 +17,7 @@ namespace OnlineMenu.Model
         public System.Guid Id { get; set; }
         public System.Guid SubCategoryId { get; set; }
         public System.Guid ItemId { get; set; }
+        public bool Sequence { get; set; }
     
         public virtual Item Item { get; set; }
         public virtual SubCategory SubCategory { get; set; }

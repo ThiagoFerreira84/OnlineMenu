@@ -10,11 +10,11 @@ namespace OnlineMenu.Service.ViewModels
     {
         public System.Guid Id { get; set; }
         public System.Guid OrderId { get; set; }
-        public System.Guid MenuItemId { get; set; }
+        public System.Guid ItemId { get; set; }
         public int Quantity { get; set; }
         public string Notes { get; set; }
 
-        public virtual VMMenuItem MenuItem { get; set; }
+        public virtual VMItem Item { get; set; }
         public virtual VMOrder Order { get; set; }
     }
 }

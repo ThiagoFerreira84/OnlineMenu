@@ -23,14 +23,12 @@ namespace OnlineMenu.Model
     
         public System.Guid Id { get; set; }
         public System.Guid UserTypeId { get; set; }
-        public System.Guid RestaurantId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual Restaurant Restaurant { get; set; }
         public virtual UserType UserType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserVsRestaurant> UserVsRestaurants { get; set; }

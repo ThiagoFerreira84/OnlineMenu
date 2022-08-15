@@ -1,4 +1,4 @@
-﻿@model OnlineMenu.Service.ViewModels.VMMenuItem
+﻿@model OnlineMenu.Service.ViewModels.VMItem
 
 @{
     ViewBag.Title = "Create";
@@ -7,11 +7,11 @@
 
 <h2>Create Menu Item</h2>
 
-@using (Html.BeginForm("CreateOrUpdate", "MenuItemsCategory", FormMethod.Post, new { enctype = "multipart/form-data", @id = "form-create-external-link" }))
+@using (Html.BeginForm("CreateOrUpdate", "ItemsCategory", FormMethod.Post, new { enctype = "multipart/form-data", @id = "form-create-external-link" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.MenuCategoryId)
-    @Html.HiddenFor(model => model.MenuSubCategoryId)
+    @Html.HiddenFor(model => model.CategoryId)
+    @Html.HiddenFor(model => model.SubCategoryId)
 
     <div class="form-horizontal">
         <hr />
@@ -113,7 +113,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { menuCategoryId = Model.MenuCategoryId })
+    @Html.ActionLink("Back to List", "Index", new { categoryId = Model.CategoryId })
 </div>
 
 @section Scripts {

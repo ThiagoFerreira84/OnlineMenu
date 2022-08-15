@@ -25,7 +25,7 @@ namespace OnlineMenu.Model
         public string Tittle { get; set; }
         public string Subtitle { get; set; }
         public string Footer { get; set; }
-        public Nullable<int> Sequency { get; set; }
+        public Nullable<int> Sequence { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

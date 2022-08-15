@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineMenu.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace OnlineMenu.Service.ViewModels
 {
-    public class VMMenuItem
+    public class VMItem
     {
         public System.Guid Id { get; set; }
-        public System.Guid MenuCategoryId { get; set; }
-        public System.Guid MenuSubCategoryId { get; set; }
+        public System.Guid CategoryId { get; set; }
+        public System.Guid SubCategoryId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -34,13 +35,11 @@ namespace OnlineMenu.Service.ViewModels
         public Nullable<decimal> PriceBig { get; set; }
 
         public string Type { get; set; }
+
         public string Photo { get; set; }
 
-        [Required]
-        public Nullable<int> Sequence { get; set; }
-
-        public virtual VMMenuCategory MenuCategory { get; set; }
-        public virtual VMMenuSubCategory MenuSubCategory { get; set; }
+        public virtual ICollection<VMCategoryVsItem> CategoryVsItems { get; set; }
         public virtual ICollection<VMOrderItem> OrderItems { get; set; }
+        public virtual ICollection<VMSubCategoryVsItem> SubCategoryVsItems { get; set; }
     }
 }

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace OnlineMenu.Service.ViewModels
 {
-    public class VMMenuSubCategory
+    public class VMSubCategory
     {
         public System.Guid Id { get; set; }
-        public System.Guid MenuCategoryId { get; set; }
+        public System.Guid CategoryId { get; set; }
         public string Tittle { get; set; }
         public string Subtitle { get; set; }
         public string Footer { get; set; }
 
         [Required]
-        public Nullable<int> Sequency { get; set; }
+        public Nullable<int> Sequence { get; set; }
 
-        public virtual VMMenuCategory MenuCategory { get; set; }
-        public virtual ICollection<VMMenuItem> MenuItems { get; set; }
+        public virtual VMCategory Category { get; set; }
+        public virtual ICollection<VMItem> Items { get; set; }
     }
 }

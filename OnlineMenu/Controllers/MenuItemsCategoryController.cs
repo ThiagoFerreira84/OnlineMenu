@@ -10,40 +10,40 @@ using System.Web.Mvc;
 
 namespace OnlineMenu.Controllers
 {
-    public class MenuItemsCategoryController : Controller
+    public class ItemsCategoryController : Controller
     {
-        private IMenuItemsService menuItemsService;
+        private IItemsService itemsService;
         private IRestaurantService restaurantService;
 
-        public MenuItemsCategoryController(IMenuItemsService menuItemsService, IRestaurantService restaurantService)
+        public ItemsCategoryController(IItemsService itemsService, IRestaurantService restaurantService)
         {
-            this.menuItemsService = menuItemsService;
+            this.itemsService = itemsService;
             this.restaurantService = restaurantService;
         }
 
-        public ActionResult Index(Guid menuCategoryId)
+        public ActionResult Index(Guid categoryId)
         {
-            var categories = menuItemsService.GetByCategoryId(menuCategoryId);
-            ViewBag.MenuCategoryId = menuCategoryId;
+            var categories = itemsService.GetByCategoryId(categoryId);
+            ViewBag.CategoryId = categoryId;
             return View(categories);
         }
 
-        public ActionResult Create(Guid menuCategoryId)
+        public ActionResult Create(Guid categoryId)
         {
-            var itemWithMaxSequence = menuItemsService.GetByCategoryId(menuCategoryId).Max(x => x.Sequence);
+            var itemWithMaxSequence = itemsService.GetByCategoryId(categoryId).Max(x => x.Sequence);
             var nextSequence = itemWithMaxSequence == null ? 1 : itemWithMaxSequence + 1;
 
-            var MenuItems = new VMMenuItem()
+            var Items = new VMItem()
             {
-                MenuCategoryId = menuCategoryId,
+                CategoryId = categoryId,
                 Sequence = nextSequence,
             };
 
-            return View(MenuItems);
+            return View(Items);
         }
 
         [HttpPost]
-        public ActionResult CreateOrUpdate(VMMenuItem vmEntity)
+        public ActionResult CreateOrUpdate(VMItem vmEntity)
         {
             if (ModelState.IsValid)
             {
@@ -63,11 +63,11 @@ namespace OnlineMenu.Controllers
 
                 if (vmEntity.Id == new Guid())
                 {
-                    menuItemsService.Create(vmEntity);
+                    itemsService.Create(vmEntity);
                 }
                 else
                 {
-                    menuItemsService.Update(vmEntity);
+                    itemsService.Update(vmEntity);
                 }
             }
 
@@ -76,14 +76,14 @@ namespace OnlineMenu.Controllers
 
         public ActionResult Edit(Guid id)
         {
-            return View(menuItemsService.GetById(id));
+            return View(itemsService.GetById(id));
         }
 
         [HttpPost]
-        public ActionResult Edit(VMMenuItem vmEntity)
+        public ActionResult Edit(VMItem vmEntity)
         {
-            menuItemsService.Update(vmEntity);
-            return RedirectToAction("Index", new { menuCategoryId = vmEntity.MenuCategoryId });
+            itemsService.Update(vmEntity);
+            return RedirectToAction("Index", new { categoryId = vmEntity.CategoryId });
         }
     }
 }

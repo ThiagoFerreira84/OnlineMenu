@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineMenu.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMenu.Service.ViewModels
 {
-    public class VMMenuCategory
+    public class VMCategory
     {
         public System.Guid Id { get; set; }
         public System.Guid RestaurantId { get; set; }
@@ -19,8 +20,8 @@ namespace OnlineMenu.Service.ViewModels
         [Required]
         public Nullable<int> Sequence { get; set; }
 
-        public virtual VMRestaurant Restaurant { get; set; }
-        public virtual ICollection<VMMenuItem> MenuItems { get; set; }
-        public virtual ICollection<VMMenuSubCategory> MenuSubCategories { get; set; }
+        public virtual ICollection<VMCategoryVsItem> CategoryVsItems { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
+        public virtual ICollection<VMSubCategory> SubCategories { get; set; }
     }
 }

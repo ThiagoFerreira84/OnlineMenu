@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMMenuItem>
+﻿@model IEnumerable<OnlineMenu.Service.ViewModels.VMItem>
 
 @{
     ViewBag.Title = "Index";
@@ -8,7 +8,7 @@
 <h2>Menu Items</h2>
 
 <p>
-    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "MenuItemsCategory", new {menuCategoryId = ViewBag.MenuCategoryId })';return false;">
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "ItemsCategory", new {categoryId = ViewBag.CategoryId })';return false;">
         <span class="fa fa-plus-circle"></span> Create
     </button>
 </p>

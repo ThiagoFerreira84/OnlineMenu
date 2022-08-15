@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineMenu.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -37,9 +38,9 @@ namespace OnlineMenu.Service.ViewModels
         public string LogoPath { get; set; }
 
         public VMCountry Country { get; set; }
-        public virtual ICollection<VMMenuCategory> MenuCategories { get; set; }
+        public virtual ICollection<VMCategory> MenuCategories { get; set; }
         public virtual ICollection<VMSubscription> Subscriptions { get; set; }
         public virtual ICollection<VMTable> Tables { get; set; }
-        public virtual ICollection<VMUser> Users { get; set; }
+        public virtual ICollection<VMUserVsRestaurant> UserVsRestaurants { get; set; }
     }
 }
