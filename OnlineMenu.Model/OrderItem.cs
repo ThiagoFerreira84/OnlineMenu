@@ -20,7 +20,6 @@ namespace OnlineMenu.Model
         public int Quantity { get; set; }
         public string Notes { get; set; }
     
-        public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }
     }
 }

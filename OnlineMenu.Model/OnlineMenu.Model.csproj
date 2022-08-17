@@ -56,9 +56,6 @@
     <Compile Include="Category.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CategoryVsItem.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Country.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
@@ -91,12 +88,6 @@
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Setting.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SubCategory.cs">
-      <DependentUpon>OnlineMenuModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SubCategoryVsItem.cs">
       <DependentUpon>OnlineMenuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Subscription.cs">

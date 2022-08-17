@@ -24,7 +24,6 @@ namespace OnlineMenu.Model
         public decimal GovernmentTax { get; set; }
         public string CurrencySymbol { get; set; }
         public Nullable<int> NoOfTables { get; set; }
-        public Nullable<int> MenuCategories { get; set; }
-        public Nullable<int> Users { get; set; }
+        public Nullable<int> Categories { get; set; }
     }
 }

@@ -17,8 +17,6 @@ namespace OnlineMenu.Service.Services
 
         List<VMItem> GetByCategoryId(Guid id);
 
-        List<VMItem> GetBySubCategoryId(Guid id);
-
         int Create(VMItem entity);
 
         int Update(VMItem entity);
@@ -57,14 +55,7 @@ namespace OnlineMenu.Service.Services
 
         public List<VMItem> GetByCategoryId(Guid id)
         {
-            var entities = unitOfWork.CategoryVsItem.Find(t => t.CategoryId == id).OrderBy(t => t.Sequence).Select(t => t.Item).ToList();
-            return Mapper.Map<List<VMItem>>(entities);
-        }
-
-        public List<VMItem> GetBySubCategoryId(Guid id)
-        {
-            var entities = unitOfWork.SubCategoryVsItem.Find(t => t.SubCategoryId == id).OrderBy(t => t.Sequence).Select(t => t.Item).ToList();
-
+            var entities = unitOfWork.Item.Find(t => t.CategoryId == id).OrderBy(t => t.Sequence).ToList();
             return Mapper.Map<List<VMItem>>(entities);
         }
 

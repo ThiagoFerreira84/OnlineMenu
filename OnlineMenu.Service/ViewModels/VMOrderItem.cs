@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineMenu.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,6 @@ namespace OnlineMenu.Service.ViewModels
         public System.Guid ItemId { get; set; }
         public int Quantity { get; set; }
         public string Notes { get; set; }
-
-        public virtual VMItem Item { get; set; }
-        public virtual VMOrder Order { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

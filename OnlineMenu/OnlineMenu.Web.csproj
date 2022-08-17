@@ -143,7 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MenuItemsCategoryController.cs" />
-    <Compile Include="Controllers\MenuCategoriesController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,9 +208,9 @@
     <Content Include="Views\Restaurants\Details.cshtml" />
     <Content Include="Views\Tables\Index.cshtml" />
     <Content Include="Views\Tables\AddOrRemove.cshtml" />
-    <Content Include="Views\MenuCategories\Index.cshtml" />
-    <Content Include="Views\MenuCategories\Create.cshtml" />
-    <Content Include="Views\MenuCategories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\MenuItemsCategory\Index.cshtml" />
     <Content Include="Views\MenuItemsCategory\Create.cshtml" />
     <Content Include="Views\MenuItemsCategory\Edit.cshtml" />

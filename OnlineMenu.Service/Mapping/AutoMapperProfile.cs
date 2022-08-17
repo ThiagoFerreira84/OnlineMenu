@@ -15,7 +15,6 @@ namespace OnlineMenu.Service.Mapping
         {
             CreateMap<Category, VMCategory>().ReverseMap();
             CreateMap<Item, VMItem>().ReverseMap();
-            CreateMap<SubCategory, VMSubCategory>().ReverseMap();
             CreateMap<Order, VMOrder>().ReverseMap();
             CreateMap<OrderItem, VMOrderItem>().ReverseMap();
             CreateMap<Restaurant, VMRestaurant>().ReverseMap();

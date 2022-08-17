@@ -8,12 +8,12 @@ using System.Web.Mvc;
 
 namespace OnlineMenu.Controllers
 {
-    public class MenuCategoriesController : Controller
+    public class CategoriesController : Controller
     {
         private ICategoryService categoryService;
         private IRestaurantService restaurantService;
 
-        public MenuCategoriesController(ICategoryService categoryService, IRestaurantService restaurantService)
+        public CategoriesController(ICategoryService categoryService, IRestaurantService restaurantService)
         {
             this.categoryService = categoryService;
             this.restaurantService = restaurantService;

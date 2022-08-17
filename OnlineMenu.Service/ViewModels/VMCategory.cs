@@ -20,8 +20,7 @@ namespace OnlineMenu.Service.ViewModels
         [Required]
         public Nullable<int> Sequence { get; set; }
 
-        public virtual ICollection<VMCategoryVsItem> CategoryVsItems { get; set; }
-        public virtual Restaurant Restaurant { get; set; }
-        public virtual ICollection<VMSubCategory> SubCategories { get; set; }
+        public virtual ICollection<VMItem> Items { get; set; }
+        public virtual VMRestaurant Restaurant { get; set; }
     }
 }

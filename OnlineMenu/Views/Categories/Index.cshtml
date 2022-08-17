@@ -8,7 +8,7 @@
 <h2>Menu Categories (@ViewBag.RestaurantName)</h2>
 
 <p>
-    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "MenuCategories", new {restaurantId = ViewBag.RestaurantId })';return false;">
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Create", "Categories", new {restaurantId = ViewBag.RestaurantId })';return false;">
         <span class="fa fa-plus-circle"></span> Create new category
     </button>
 </p>

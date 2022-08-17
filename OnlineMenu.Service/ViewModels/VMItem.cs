@@ -13,7 +13,6 @@ namespace OnlineMenu.Service.ViewModels
     {
         public System.Guid Id { get; set; }
         public System.Guid CategoryId { get; set; }
-        public System.Guid SubCategoryId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -41,8 +40,6 @@ namespace OnlineMenu.Service.ViewModels
 
         public int Sequence { get; set; }
 
-        public virtual ICollection<VMCategoryVsItem> CategoryVsItems { get; set; }
-        public virtual ICollection<VMOrderItem> OrderItems { get; set; }
-        public virtual ICollection<VMSubCategoryVsItem> SubCategoryVsItems { get; set; }
+        public virtual ICollection<VMCategory> Category { get; set; }
     }
 }

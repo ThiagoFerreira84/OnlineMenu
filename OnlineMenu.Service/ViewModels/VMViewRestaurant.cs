@@ -34,9 +34,5 @@ namespace OnlineMenu.Service.ViewModels
 
         [Display(Name = "Tables")]
         public Nullable<int> NoOfTables { get; set; }
-
-        //[Display(Name = "Menu Categories")]
-        //public Nullable<int> MenuCategories { get; set; }
-        public Nullable<int> Users { get; set; }
     }
 }

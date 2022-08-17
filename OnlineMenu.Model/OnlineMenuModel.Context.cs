@@ -26,15 +26,12 @@ namespace OnlineMenu.Model
         }
     
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CategoryVsItem> CategoryVsItems { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
-        public virtual DbSet<SubCategory> SubCategories { get; set; }
-        public virtual DbSet<SubCategoryVsItem> SubCategoryVsItems { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Table> Tables { get; set; }

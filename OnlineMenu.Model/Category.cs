@@ -17,8 +17,7 @@ namespace OnlineMenu.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.CategoryVsItems = new HashSet<CategoryVsItem>();
-            this.SubCategories = new HashSet<SubCategory>();
+            this.Items = new HashSet<Item>();
         }
     
         public System.Guid Id { get; set; }
@@ -30,9 +29,7 @@ namespace OnlineMenu.Model
         public Nullable<int> Sequence { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoryVsItem> CategoryVsItems { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
         public virtual Restaurant Restaurant { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }
