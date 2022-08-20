@@ -19,6 +19,7 @@ namespace OnlineMenu.Data
         IRepository<Subscription> Subscription { get; }
         IRepository<User> User { get; }
         IRepository<UserVsRestaurant> UserVsRestaurant { get; }
+        IRepository<Page> Page { get; }
 
         int SaveChanges();
     }
@@ -36,6 +37,7 @@ namespace OnlineMenu.Data
         public IRepository<Subscription> Subscription { get; private set; }
         public IRepository<User> User { get; private set; }
         public IRepository<UserVsRestaurant> UserVsRestaurant { get; private set; }
+        public IRepository<Page> Page { get; private set; }
 
         public UnitOfWork()
         {
@@ -50,6 +52,7 @@ namespace OnlineMenu.Data
             Subscription = new Repository<Subscription>(_context);
             User = new Repository<User>(_context);
             UserVsRestaurant = new Repository<UserVsRestaurant>(_context);
+            Page = new Repository<Page>(_context);
         }
 
         public int SaveChanges()

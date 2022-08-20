@@ -17,7 +17,7 @@ namespace OnlineMenu.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Restaurant()
         {
-            this.Categories = new HashSet<Category>();
+            this.Pages = new HashSet<Page>();
             this.Subscriptions = new HashSet<Subscription>();
             this.Tables = new HashSet<Table>();
             this.UserVsRestaurants = new HashSet<UserVsRestaurant>();
@@ -34,9 +34,9 @@ namespace OnlineMenu.Model
         public string LogoFileName { get; set; }
         public Nullable<bool> IskitchenOpen { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
         public virtual Country Country { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Page> Pages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subscription> Subscriptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

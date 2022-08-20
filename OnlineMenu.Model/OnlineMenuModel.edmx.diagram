@@ -5,26 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="568025e304e444ffa3a5c836dce35671" Name="Diagram1">
-        <EntityTypeShape EntityType="OnlineMenuModel.Category" Width="1.5" PointX="5.25" PointY="6.375" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Country" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Item" Width="1.5" PointX="7.5" PointY="5.875" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Order" Width="1.5" PointX="7.5" PointY="12.75" />
-        <EntityTypeShape EntityType="OnlineMenuModel.OrderItem" Width="1.5" PointX="9.75" PointY="13" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Restaurant" Width="1.5" PointX="3" PointY="5.875" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Setting" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Subscription" Width="1.5" PointX="5.25" PointY="3.125" />
-        <EntityTypeShape EntityType="OnlineMenuModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="OnlineMenuModel.Table" Width="1.5" PointX="5.25" PointY="13" />
-        <EntityTypeShape EntityType="OnlineMenuModel.User" Width="1.5" PointX="3" PointY="10.5" />
-        <EntityTypeShape EntityType="OnlineMenuModel.UserType" Width="1.5" PointX="0.75" PointY="11" />
-        <EntityTypeShape EntityType="OnlineMenuModel.UserVsRestaurant" Width="1.5" PointX="5.25" PointY="9.75" />
-        <EntityTypeShape EntityType="OnlineMenuModel.ViewRestaurant" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Category" Width="1.5" PointX="7.5" PointY="4.875" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Country" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Item" Width="1.5" PointX="9.75" PointY="4.375" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Order" Width="1.5" PointX="7.5" PointY="14" />
+        <EntityTypeShape EntityType="OnlineMenuModel.OrderItem" Width="1.5" PointX="9.75" PointY="14.25" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Page" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Restaurant" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Setting" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Subscription" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="OnlineMenuModel.sysdiagram" Width="1.5" PointX="0.75" PointY="12" />
+        <EntityTypeShape EntityType="OnlineMenuModel.Table" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="OnlineMenuModel.User" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="OnlineMenuModel.UserType" Width="1.5" PointX="3.75" PointY="2.375" />
+        <EntityTypeShape EntityType="OnlineMenuModel.UserVsRestaurant" Width="1.5" PointX="8.25" PointY="9" />
+        <EntityTypeShape EntityType="OnlineMenuModel.ViewRestaurant" Width="1.5" PointX="10.75" PointY="9" />
+        <AssociationConnector Association="OnlineMenuModel.FK_Category_Page" />
         <AssociationConnector Association="OnlineMenuModel.FK_Item_Category" />
-        <AssociationConnector Association="OnlineMenuModel.FK_MenuCategory_Restaurant" />
         <AssociationConnector Association="OnlineMenuModel.FK_Restaurant_Country" />
         <AssociationConnector Association="OnlineMenuModel.FK_OrderItems_Order1" />
         <AssociationConnector Association="OnlineMenuModel.FK_Orders_Table" />
         <AssociationConnector Association="OnlineMenuModel.FK_Orders_User" />
+        <AssociationConnector Association="OnlineMenuModel.FK_Page_Restaurant" />
         <AssociationConnector Association="OnlineMenuModel.FK_Subscription_Restaurant" />
         <AssociationConnector Association="OnlineMenuModel.FK_Table_Restaurant" />
         <AssociationConnector Association="OnlineMenuModel.FK_UserVsRestaurant_Restaurant" />

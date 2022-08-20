@@ -15,7 +15,7 @@ namespace OnlineMenu.Service.Services
     {
         VMCategory GetById(Guid id);
 
-        List<VMCategory> GetByRestaurantId(Guid id);
+        List<VMCategory> GetByPageId(Guid id);
 
         int Create(VMCategory entity);
 
@@ -54,9 +54,9 @@ namespace OnlineMenu.Service.Services
             return Mapper.Map<VMCategory>(entity);
         }
 
-        public List<VMCategory> GetByRestaurantId(Guid id)
+        public List<VMCategory> GetByPageId(Guid id)
         {
-            var entities = unitOfWork.Category.Find(t => t.RestaurantId == id).OrderBy(t => t.Sequence).ToList();
+            var entities = unitOfWork.Category.Find(t => t.PageId == id).OrderBy(t => t.Sequence).ToList();
             return Mapper.Map<List<VMCategory>>(entities);
         }
 

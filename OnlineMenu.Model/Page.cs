@@ -12,24 +12,21 @@ namespace OnlineMenu.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Page
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Page()
         {
-            this.Items = new HashSet<Item>();
+            this.Categories = new HashSet<Category>();
         }
     
         public System.Guid Id { get; set; }
-        public System.Guid PageId { get; set; }
+        public System.Guid RestaurantId { get; set; }
         public string Title { get; set; }
-        public string Subtitle { get; set; }
-        public string Footer { get; set; }
-        public byte[] BackgroundImage { get; set; }
         public int Sequence { get; set; }
     
-        public virtual Page Page { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
     }
 }

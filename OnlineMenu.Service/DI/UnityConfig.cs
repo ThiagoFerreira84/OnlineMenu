@@ -26,6 +26,7 @@ namespace OnlineMenu.Service.DI
             container.RegisterType<IOrderItemService, OrderItemService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IUserService, UserService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IUserVsRestaurantService, UserVsRestaurantService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPageService, PageService>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IUnitOfWork, UnitOfWork>(new ContainerControlledLifetimeManager());
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

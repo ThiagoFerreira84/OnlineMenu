@@ -11,28 +11,28 @@ namespace OnlineMenu.Controllers
     public class CategoriesController : Controller
     {
         private ICategoryService categoryService;
-        private IRestaurantService restaurantService;
+        private IPageService pageService;
 
-        public CategoriesController(ICategoryService categoryService, IRestaurantService restaurantService)
+        public CategoriesController(ICategoryService categoryService, IPageService pageService)
         {
             this.categoryService = categoryService;
-            this.restaurantService = restaurantService;
+            this.pageService = pageService;
         }
 
-        public ActionResult Index(Guid restaurantId)
+        public ActionResult Index(Guid pageId)
         {
-            var categories = categoryService.GetByRestaurantId(restaurantId);
+            var categories = categoryService.GetByPageId(pageId);
 
-            ViewBag.RestaurantId = restaurantId;
-            ViewBag.RestaurantName = restaurantService.GetById(restaurantId).Name;
+            ViewBag.PageId = pageId;
+            ViewBag.PageName = pageService.GetById(pageId).Title;
             return View(categories);
         }
 
-        public ActionResult Create(Guid restaurantId)
+        public ActionResult Create(Guid pageId)
         {
             var category = new VMCategory()
             {
-                RestaurantId = restaurantId,
+                PageId = pageId,
             };
 
             return View(category);
@@ -42,7 +42,7 @@ namespace OnlineMenu.Controllers
         public ActionResult Create(VMCategory vmEntity)
         {
             categoryService.Create(vmEntity);
-            return RedirectToAction("Index", new { restaurantId = vmEntity.RestaurantId });
+            return RedirectToAction("Index", new { pageId = vmEntity.PageId });
         }
 
         public ActionResult Edit(Guid id)
@@ -54,7 +54,7 @@ namespace OnlineMenu.Controllers
         public ActionResult Edit(VMCategory vmEntity)
         {
             categoryService.Update(vmEntity);
-            return RedirectToAction("Index", new { restaurantId = vmEntity.RestaurantId });
+            return RedirectToAction("Index", new { pageId = vmEntity.PageId });
         }
     }
 }

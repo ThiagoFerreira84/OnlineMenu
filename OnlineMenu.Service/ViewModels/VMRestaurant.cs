@@ -38,7 +38,7 @@ namespace OnlineMenu.Service.ViewModels
         public string LogoPath { get; set; }
 
         public VMCountry Country { get; set; }
-        public virtual ICollection<VMCategory> MenuCategories { get; set; }
+        public virtual ICollection<VMPage> Pages { get; set; }
         public virtual ICollection<VMSubscription> Subscriptions { get; set; }
         public virtual ICollection<VMTable> Tables { get; set; }
         public virtual ICollection<VMUserVsRestaurant> UserVsRestaurants { get; set; }
